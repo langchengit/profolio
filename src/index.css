@@ -1,0 +1,244 @@
+@import 'tailwindcss';
+
+/* Manual dark mode driven by [data-theme="dark"] on <html> (set before paint
+   by the inline script in index.html, and toggled at runtime by the store). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Semantic tokens map to runtime CSS variables so utilities like `bg-surface`
+   or `text-accent` switch instantly with the theme. */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+}
+
+:root,
+[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f3f3fb;
+  --bg-soft: #ffffff;
+  --surface: rgba(255, 255, 255, 0.66);
+  --surface-strong: rgba(255, 255, 255, 0.86);
+  --border: rgba(22, 18, 46, 0.1);
+  --border-strong: rgba(22, 18, 46, 0.2);
+  --text: #15131f;
+  --muted: #514f66;
+  --faint: #87859b;
+  --accent: #6d28d9;
+  --accent-2: #0e8aa8;
+  --accent-3: #db2777;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #06060d;
+  --bg-soft: #0c0b16;
+  --surface: rgba(255, 255, 255, 0.045);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.09);
+  --border-strong: rgba(255, 255, 255, 0.17);
+  --text: #ecebf7;
+  --muted: #a8a5c0;
+  --faint: #6d6a86;
+  --accent: #8b5cf6;
+  --accent-2: #22d3ee;
+  --accent-3: #f472b6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100%;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+#root {
+  position: relative;
+  min-height: 100%;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+  background-clip: padding-box;
+}
+
+/* Gradient text used for accent words / headings. */
+.text-gradient {
+  background-image: linear-gradient(
+    115deg,
+    var(--accent),
+    var(--accent-2) 52%,
+    var(--accent-3)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Scroll-reveal: starts hidden, animates in when .is-visible is added. */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.68, 0.16, 1),
+    transform 0.7s cubic-bezier(0.22, 0.68, 0.16, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Reusable UI primitives ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.72rem 1.45rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+.btn:active {
+  transform: translateY(1px);
+}
+.btn-primary {
+  color: #fff;
+  background-image: linear-gradient(120deg, var(--accent), var(--accent-3));
+  box-shadow: 0 10px 32px -12px var(--accent);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -10px var(--accent);
+}
+.btn-ghost {
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  backdrop-filter: blur(8px);
+}
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  transition:
+    border-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.card:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 18px 50px -28px rgba(0, 0, 0, 0.55);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.3rem 0.7rem;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  color: var(--muted);
+}
+
+/* ---------- Above-the-fold intro animation ---------- */
+@keyframes intro-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.intro {
+  opacity: 0;
+  animation: intro-up 0.8s cubic-bezier(0.22, 0.68, 0.16, 1) forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    opacity: 1;
+    animation: none;
+  }
+}
