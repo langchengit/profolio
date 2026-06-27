@@ -1,5 +1,4 @@
-import { Suspense, lazy, useEffect } from 'react';
-import { initSignals } from './lib/signals';
+import { Suspense, lazy } from 'react';
 import { Header } from './components/Header';
 import { ScrollProgress } from './components/ScrollProgress';
 import { Hero } from './components/Hero';
@@ -18,10 +17,6 @@ const Background = lazy(() =>
 );
 
 export default function App() {
-  useEffect(() => {
-    initSignals();
-  }, []);
-
   return (
     <>
       <Suspense fallback={null}>

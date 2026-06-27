@@ -72,7 +72,7 @@ export function Contact() {
 
           <a
             href={`mailto:${contact.email}`}
-            className="btn btn-primary mt-7 text-base"
+            className="btn btn-ghost mt-7 text-base"
           >
             <Mail size={18} /> {contact.email}
           </a>

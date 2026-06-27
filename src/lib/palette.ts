@@ -2,6 +2,7 @@ import type { Theme } from './theme';
 
 /** Colors + render settings for the 3D scene, derived from the active theme. */
 export interface ScenePalette {
+  bg: string; // page background the orb fades into when scrolled past the hero
   colorA: string; // blob base color (low displacement)
   colorB: string; // blob peak color (high displacement)
   rim: string; // fresnel rim glow
@@ -18,6 +19,7 @@ export interface ScenePalette {
 export function getScenePalette(theme: Theme): ScenePalette {
   if (theme === 'light') {
     return {
+      bg: '#f3f3fb',
       colorA: '#7c3aed',
       colorB: '#0ea5e9',
       rim: '#db2777',
@@ -30,6 +32,7 @@ export function getScenePalette(theme: Theme): ScenePalette {
     };
   }
   return {
+    bg: '#06060d',
     colorA: '#7c3aed',
     colorB: '#22d3ee',
     rim: '#f472b6',

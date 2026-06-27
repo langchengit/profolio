@@ -115,6 +115,8 @@ uniform vec3 uColorA;
 uniform vec3 uColorB;
 uniform vec3 uRim;
 uniform float uAmbient;
+uniform float uOpacity;
+uniform vec3 uBgColor;
 
 varying vec3 vNormal;
 varying vec3 vViewPos;
@@ -133,7 +135,11 @@ void main(){
   vec3 color = base * (uAmbient + diff * 0.85);
   color += uRim * fres * 1.4;
 
-  gl_FragColor = vec4(color, 1.0);
+  // Fade toward the page background as the orb scrolls past the hero. Done as a
+  // color mix (not material alpha) so it renders reliably through the bloom
+  // post-processing pass, which does not preserve per-fragment transparency.
+  vec3 faded = mix(uBgColor, color, clamp(uOpacity, 0.0, 1.0));
+  gl_FragColor = vec4(faded, 1.0);
 }
 `;
 

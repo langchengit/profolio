@@ -14,7 +14,7 @@ export function Hero() {
       className="relative flex min-h-[100svh] items-end px-6 pb-28 lg:items-center lg:pb-0"
     >
       <div className="mx-auto w-full max-w-6xl">
-        <div className="max-w-2xl">
+        <div className="hero-legible max-w-2xl">
           <div
             className="intro mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-muted backdrop-blur"
             style={{ animationDelay: '0.05s' }}
@@ -23,8 +23,11 @@ export function Hero() {
           </div>
 
           <h1
-            className="intro font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl"
-            style={{ animationDelay: '0.12s' }}
+            className="intro font-display font-bold leading-[1.05] tracking-tight"
+            style={{
+              animationDelay: '0.12s',
+              fontSize: 'clamp(3rem, 3.5vw + 2rem, 6rem)',
+            }}
           >
             {personal.name}
           </h1>
@@ -49,7 +52,7 @@ export function Hero() {
             className="intro mt-9 flex flex-wrap items-center gap-3"
             style={{ animationDelay: '0.36s' }}
           >
-            <a href="#projects" className="btn btn-primary">
+            <a href="#projects" className="btn btn-ghost">
               View my work
             </a>
             <a href="#contact" className="btn btn-ghost">

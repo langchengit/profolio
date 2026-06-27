@@ -1,10 +1,11 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import { AdaptiveDpr } from '@react-three/drei';
 import { useTheme } from '../lib/theme';
 import { getScenePalette } from '../lib/palette';
 import { usePerfTier, prefersReducedMotion } from '../lib/perf';
+import { initSignals } from '../lib/signals';
 import type { ScenePalette } from '../lib/palette';
 import type { PerfTier } from '../lib/perf';
 import { Blob } from './Blob';
@@ -42,6 +43,13 @@ function Scene({
 
 /** Fixed full-viewport canvas rendered behind the page content. */
 export function Background() {
+  // Initialize pointer/scroll signals here (not in App): this component is
+  // lazy-loaded into its own chunk, so the scene reads this chunk's copy of
+  // the signals module — it must be the copy that gets its listeners attached.
+  useEffect(() => {
+    initSignals();
+  }, []);
+
   const theme = useTheme((s) => s.theme);
   const tier = usePerfTier();
   const reduceMotion = useMemo(() => prefersReducedMotion(), []);

@@ -21,7 +21,8 @@ export const education: EducationEntry[] = [
   {
     id: 'uwaterloo',
     school: 'University of Waterloo',
-    credential: 'Bachelor of Science in Software Engineering | Co-op',
+    credential: 'Bachelor of Applied Science in Software Engineering | Co-op',
+    detail: 'Earned President\'s Scholorship of Distinction',
     location: 'Waterloo, ON',
     start: 'Sep 2026',
     end: 'Apr 2031',
@@ -39,7 +40,7 @@ export const education: EducationEntry[] = [
     id: 'uhill',
     school: 'University Hill Secondary School',
     credential: 'High School Diploma',
-    detail: 'Computer Science Advanced',
+    detail: '',
     location: 'Vancouver, BC',
     start: 'Sep 2022',
     end: 'Jun 2026',
@@ -130,7 +131,7 @@ export const skills: SkillCategory[] = [
   {
     id: 'tools',
     label: 'Tools & Platforms',
-    items: ['Git', 'GitHub', 'DevPost', 'VS Code'],
+    items: ['Git', 'GitHub', 'DevPost', 'VS Code', 'NodeJS', 'ReactJS'],
   },
   {
     id: 'strengths',
