@@ -139,7 +139,7 @@ export const projects: ProjectEntry[] = [
       'Reports: based on the data from the timer, create pie chart and line graph for time spent per course and per day'
     ],
     githubUrl: 'https://github.com/langchengit/task-manager-project',
-    liveUrl: 'https://www.taskmanager.dpdns.org/taskmanager.html',
+    liveUrl: 'https://taskmanager.minglanging.com/taskmanager.html',
     imageUrl: '',
     thumbnail: taskManagerThumnail,
   },
