@@ -14,7 +14,7 @@ import taskManagerThumnail from '../assets/task-manager-report.png';
 export const personal: PersonalInfo = {
   name: 'Minglang Chen',
   tagline:
-    'Incoming Software Engineer @ University of Waterloo — I compete to learn. I teach to grow.',
+    'Incoming Software Engineering Student @ University of Waterloo — I compete to learn. I teach to grow.',
   location: 'Vancouver, BC',
   photoUrl: '',
 };
