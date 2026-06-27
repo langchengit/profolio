@@ -131,7 +131,7 @@ export const projects: ProjectEntry[] = [
     location: 'Vancouver, BC',
     tags: ['HTML', 'CSS', 'JavaScript'],
     bullets: [
-      `capstone project inspired from toggl.com`,
+      `Capstone project inspired from toggl.com`,
       'A website that can keep track of your courses, tasks, and time',
       'Key features:',  
       'Dashboard: record courses and tasks; update and monitor the status of each; create folders for courses',
