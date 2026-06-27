@@ -16,7 +16,7 @@ export function Education() {
               </h3>
               <p className="mt-1 text-sm text-muted">{e.credential}</p>
               {e.detail && (
-                <p className="mt-2 text-sm font-medium text-accent">{e.detail}</p>
+                <p className="mt-2 text-sm font-medium text-accent" style={{whiteSpace: "pre-line"}}>{e.detail}</p>
               )}
               <div className="mt-auto pt-4">
                 <p className="font-mono text-xs text-faint">

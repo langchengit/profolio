@@ -31,7 +31,7 @@ export function Experience() {
               </ul>
               <div className="mt-4 flex flex-wrap gap-2">
                 {e.tags.map((t) => (
-                  <span key={t} className="chip">
+                  <span key={t} className="chip btn btn-ghost">
                     {t}
                   </span>
                 ))}

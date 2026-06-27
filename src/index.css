@@ -122,15 +122,10 @@ body {
 
 /* Gradient text used for accent words / headings. */
 .text-gradient {
-  background-image: linear-gradient(
-    115deg,
-    var(--accent),
-    var(--accent-2) 52%,
-    var(--accent-3)
-  );
+  color: var(--accent);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  font-weight: bold;
 }
 
 /* Scroll-reveal: starts hidden, animates in when .is-visible is added. */
@@ -235,6 +230,7 @@ body {
   font-size: 0.78rem;
   font-family: var(--font-mono);
   color: var(--muted);
+  font-weight: 400;
 }
 
 /* ---------- Above-the-fold intro animation ---------- */

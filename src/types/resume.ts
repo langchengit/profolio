@@ -36,6 +36,7 @@ export interface ProjectEntry {
   githubUrl: string;
   liveUrl: string;
   imageUrl: string;
+  thumbnail?: string;
 }
 
 export interface SkillCategory {

@@ -82,9 +82,6 @@ export function Hero() {
                 <LinkedinIcon size={20} />
               </a>
             )}
-            <span className="inline-flex items-center gap-1.5 text-xs text-faint">
-              <Sparkles size={13} className="text-accent" /> Move your cursor — the orb responds
-            </span>
           </div>
         </div>
       </div>

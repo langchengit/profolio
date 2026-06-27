@@ -7,12 +7,14 @@ import type {
   AwardCategory,
   ContactInfo,
 } from '../types/resume';
+import lineFollowingThumbnail from '../assets/front.jpg';
+import taskManagerThumnail from '../assets/task-manager-report.png';
 
 // photoUrl left blank until a real photo is provided — UI falls back to initials.
 export const personal: PersonalInfo = {
   name: 'Minglang Chen',
   tagline:
-    'Incoming Software Engineer @ University of Waterloo — building hardware, leading teams, and mentoring the next generation of problem solvers.',
+    'Incoming Software Engineer @ University of Waterloo — I compete to learn. I teach to grow.',
   location: 'Vancouver, BC',
   photoUrl: '',
 };
@@ -40,7 +42,7 @@ export const education: EducationEntry[] = [
     id: 'uhill',
     school: 'University Hill Secondary School',
     credential: 'High School Diploma',
-    detail: '',
+    detail: "Pre-calculus 12: 99\nCalculus 12: 100\nAP Physics 2 Honours 12: 99\nComputer Programming 12: 100",
     location: 'Vancouver, BC',
     start: 'Sep 2022',
     end: 'Jun 2026',
@@ -116,9 +118,30 @@ export const projects: ProjectEntry[] = [
       'Programmed the control logic on Arduino and drove the wheels’ speed and direction through a motor driver',
       'Designed and soldered the circuit, gaining hands-on hardware experience',
     ],
-    githubUrl: '',
+    githubUrl: 'https://github.com/langchengit/engineering-car-project',
     liveUrl: '',
+    imageUrl: 'https://github.com/langchengit/engineering-car-project/tree/main/photos',
+    thumbnail: lineFollowingThumbnail,
+  },
+
+   {
+    id: 'task-manager-website',
+    name: 'Task Manager Website',
+    affiliation: 'University Hill Secondary School',
+    location: 'Vancouver, BC',
+    tags: ['HTML', 'CSS', 'JavaScript'],
+    bullets: [
+      `capstone project inspired from toggl.com`,
+      'A website that can keep track of your courses, tasks, and time',
+      'Key features:',  
+      'Dashboard: record courses and tasks; update and monitor the status of each; create folders for courses',
+      'Timer: keep track of the time spent on each task',
+      'Reports: based on the data from the timer, create pie chart and line graph for time spent per course and per day'
+    ],
+    githubUrl: 'https://github.com/langchengit/task-manager-project',
+    liveUrl: 'https://www.taskmanager.dpdns.org/taskmanager.html',
     imageUrl: '',
+    thumbnail: taskManagerThumnail,
   },
 ];
 
@@ -131,7 +154,7 @@ export const skills: SkillCategory[] = [
   {
     id: 'tools',
     label: 'Tools & Platforms',
-    items: ['Git', 'GitHub', 'DevPost', 'VS Code', 'NodeJS', 'ReactJS'],
+    items: ['Git', 'GitHub', 'DevPost', 'VS Code', 'NodeJS'],
   },
   {
     id: 'strengths',

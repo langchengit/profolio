@@ -18,9 +18,7 @@ export function Header() {
           className="flex items-center gap-2.5"
         >
           <span className="h-5 w-5 rounded-full bg-gradient-to-br from-accent via-accent-2 to-accent-3 shadow-[0_0_18px_-2px_var(--accent)]" />
-          <span className="font-display text-sm font-semibold tracking-wide">
-            Minglang Chen
-          </span>
+          
         </a>
 
         <nav className="hidden items-center gap-1 rounded-full border border-border bg-surface px-2 py-1 backdrop-blur-md md:flex">
