@@ -65,22 +65,9 @@ export const experience: ExperienceEntry[] = [
     ],
   },
   {
-    id: 'physineering',
-    organization: 'University Hill Secondary School',
-    role: 'Physineering Club President',
-    tags: ['Physics', 'Engineering', 'Teaching', 'Competition Prep'],
-    location: 'Vancouver, BC',
-    start: 'Sept 2025',
-    end: 'June 2026',
-    bullets: [
-      'Conducted weekly meetings and delivered lectures',
-      'Coordinated and led teams in competitions including FYKOS, the Kwantlen Science Challenge, and UBC Physics Olympics',
-    ],
-  },
-  {
     id: 'learning-buddies',
     organization: 'Learning Buddies Network',
-    role: 'Full-time Math Mentor (Volunteer)',
+    role: 'Math Mentor',
     tags: ['Mathematics', 'Tutoring', 'Communication', 'Lesson Planning'],
     location: 'Remote',
     start: 'October 2025',
@@ -89,6 +76,19 @@ export const experience: ExperienceEntry[] = [
       'Taught one-on-one math lessons to an elementary student twice weekly, preparing lesson plans and joining post-lesson mentor discussions to refine my teaching',
       'Built strong communication skills through regular contact with students, parents, coordinators, and mentors',
       'Raised my student’s performance in subtraction, division, and multi-step word problems, while introducing beyond-curriculum topics like decimals, area, fractions, and variables',
+    ],
+  },
+  {
+    id: 'physineering',
+    organization: 'University Hill Secondary School — Physineering Club',
+    role: 'Co-Leader',
+    tags: ['Physics', 'Engineering', 'Teaching', 'Competition Prep'],
+    location: 'Vancouver, BC',
+    start: 'Sept 2025',
+    end: 'June 2026',
+    bullets: [
+      'Conducted weekly meetings and delivered lectures',
+      'Coordinated and led teams in competitions including FYKOS, the Kwantlen Science Challenge, and UBC Physics Olympics',
     ],
   },
   {
