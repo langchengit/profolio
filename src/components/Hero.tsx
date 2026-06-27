@@ -1,4 +1,4 @@
-import { ArrowDown, Mail, MapPin, Sparkles } from 'lucide-react';
+import { ArrowDown, Mail, MapPin } from 'lucide-react';
 import { contact, personal } from '../data/resume';
 import { LinkedinIcon } from './BrandIcons';
 
