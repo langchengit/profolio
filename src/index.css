@@ -8,6 +8,12 @@
   --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Lowered from Tailwind's default 64rem (1024px) so the hero's side-by-side
+     layout (text left, orb right) kicks in on common un-maximized laptop
+     browser windows, not just fully wide ones. Must match the JS threshold
+     in three/Blob.tsx (`wide = size.width >= 900`). */
+  --breakpoint-lg: 56.25rem;
 }
 
 /* Semantic tokens map to runtime CSS variables so utilities like `bg-surface`

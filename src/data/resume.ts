@@ -98,7 +98,7 @@ export const experience: ExperienceEntry[] = [
     start: 'Sep 2024',
     end: 'Jun 2025',
     bullets: [
-      'Mentored the Grade 8 Math Challengers team while in Grade 11, holding regular practice sessions and teaching new concepts',
+      'Mentored the Grade 8 Math Challengers team while in Grade 11, hosting regular practice sessions and teaching new concepts',
       'Team placed 2nd at the Math Challengers Regional competition',
     ],
   },

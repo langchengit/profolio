@@ -80,13 +80,23 @@ export function Blob({ palette, tier, reduceMotion }: BlobProps) {
     const m = mesh.current;
     if (!m) return;
 
-    // Placement mirrors the hero layout breakpoint (lg = 1024px):
-    // wide -> right of the text; narrow -> above the text (which drops lower).
-    const wide = size.width >= 1024;
-    const targetX = wide ? viewport.width * 0.34 : 0;
-    const targetY = wide ? 0.1 : viewport.height * 0.26;
+    // Below this width the orb has no room to sit beside the text without
+    // crowding it, so it's hidden outright rather than further shrunk.
+    m.visible = size.width > 693;
+    if (!m.visible) return;
+
+    // Orb always sits on the right side of the viewport at every screen size
+    // (no breakpoint-based position switching) — shifted 15% left of a fully
+    // right placement (0.34 -> 0.29) for breathing room against the hero text.
+    const targetX = viewport.width * 0.29;
+    const targetY = 0.1;
+    // Continuous (not a breakpoint) shrink keyed to raw pixel width, so the
+    // orb scales smoothly down on narrow/phone screens instead of staying
+    // full-size and crowding the text. 1280px+ is unaffected (factor 1).
+    const widthT = THREE.MathUtils.clamp((size.width - 400) / (1280 - 400), 0, 1);
+    const widthFactor = THREE.MathUtils.lerp(0.14, 1, widthT);
     const targetScale =
-      (wide ? 0.85 : 0.82) * THREE.MathUtils.clamp(viewport.width / 7, 0.6, 1.2);
+      0.85 * widthFactor * THREE.MathUtils.clamp(viewport.width / 7, 0.6, 1.2);
     const k = Math.min(1, dt * 5);
     m.position.x += (targetX - m.position.x) * k;
     m.position.y += (targetY - m.position.y) * k;

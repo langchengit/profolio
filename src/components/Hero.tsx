@@ -14,7 +14,7 @@ export function Hero() {
       className="relative flex min-h-[100svh] items-end px-6 pb-28 lg:items-center lg:pb-0"
     >
       <div className="mx-auto w-full max-w-6xl">
-        <div className="hero-legible max-w-2xl">
+        <div className="hero-legible max-w-md xl:max-w-2xl">
           <div
             className="intro mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-muted backdrop-blur"
             style={{ animationDelay: '0.05s' }}
