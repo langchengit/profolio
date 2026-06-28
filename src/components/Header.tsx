@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { navItems } from '../data/nav';
 import { useScrollSpy } from '../lib/hooks';
 import { ThemeToggle } from './ThemeToggle';
+import { PalettePicker } from './PalettePicker';
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -38,6 +39,7 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <PalettePicker />
           <ThemeToggle />
           <button
             type="button"

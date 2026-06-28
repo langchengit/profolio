@@ -16,20 +16,79 @@
     />
     <meta property="og:type" content="website" />
 
-    <!-- Apply the saved/system theme before first paint to avoid a flash. -->
+    <!-- Apply the saved/system theme + accent before first paint (no flash). -->
     <script>
       (function () {
+        var t;
         try {
-          var t = localStorage.getItem('theme');
+          t = localStorage.getItem('theme');
           if (t !== 'light' && t !== 'dark') {
             t = window.matchMedia('(prefers-color-scheme: light)').matches
               ? 'light'
               : 'dark';
           }
-          document.documentElement.setAttribute('data-theme', t);
         } catch (e) {
-          document.documentElement.setAttribute('data-theme', 'dark');
+          t = 'dark';
         }
+        document.documentElement.setAttribute('data-theme', t);
+
+        // Mirror of normalizeForTheme() in src/lib/accent.ts — keep bands in sync.
+        function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
+        function h2r(hex) {
+          var s = hex.replace('#', '').trim();
+          if (s.length === 3) s = s.replace(/./g, '$&$&');
+          var n = parseInt(s, 16);
+          return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+        }
+        function r2h(r, g, b) {
+          function p(v) { return clamp(Math.round(v), 0, 255).toString(16).padStart(2, '0'); }
+          return '#' + p(r) + p(g) + p(b);
+        }
+        function h2hsl(hex) {
+          var c = h2r(hex).map(function (v) { return v / 255; });
+          var r = c[0], g = c[1], b = c[2];
+          var mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn;
+          var l = (mx + mn) / 2, h = 0, s = 0;
+          if (d) {
+            s = d / (1 - Math.abs(2 * l - 1));
+            h = mx === r ? (((g - b) / d) % 6 + 6) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+            h *= 60;
+          }
+          return [h, s * 100, l * 100];
+        }
+        function hsl2h(h, s, l) {
+          s /= 100; l /= 100;
+          var c = (1 - Math.abs(2 * l - 1)) * s;
+          var hp = (((h % 360) + 360) % 360) / 60;
+          var x = c * (1 - Math.abs((hp % 2) - 1));
+          var r = 0, g = 0, b = 0;
+          if (hp < 1) { r = c; g = x; }
+          else if (hp < 2) { r = x; g = c; }
+          else if (hp < 3) { g = c; b = x; }
+          else if (hp < 4) { g = x; b = c; }
+          else if (hp < 5) { r = x; b = c; }
+          else { r = c; b = x; }
+          var m = l - c / 2;
+          return r2h((r + m) * 255, (g + m) * 255, (b + m) * 255);
+        }
+        function norm(hex, theme) {
+          var a = h2hsl(hex);
+          var s = clamp(a[1], 60, 96);
+          var l = theme === 'dark' ? clamp(a[2], 62, 76) : clamp(a[2], 40, 52);
+          return hsl2h(a[0], s, l);
+        }
+        try {
+          var raw = localStorage.getItem('accent');
+          if (raw) {
+            var triad = JSON.parse(raw).triad;
+            if (triad && triad.length === 3) {
+              var root = document.documentElement;
+              var names = ['--accent', '--accent-2', '--accent-3'];
+              for (var i = 0; i < 3; i++) root.style.setProperty(names[i], norm(triad[i], t));
+              root.dataset.accentBase = triad.join(',');
+            }
+          }
+        } catch (e) {}
       })();
     </script>
 

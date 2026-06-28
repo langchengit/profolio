@@ -1,4 +1,5 @@
 import type { Theme } from './theme';
+import { adjustLightness, type Triad } from './accent';
 
 /** Colors + render settings for the 3D scene, derived from the active theme. */
 export interface ScenePalette {
@@ -16,14 +17,17 @@ export interface ScenePalette {
   additiveParticles: boolean;
 }
 
-export function getScenePalette(theme: Theme): ScenePalette {
+/** Scene colors come from the active accent triad (vivid base colors), while
+ *  lighting/bloom/opacity stay tied to the theme. */
+export function getScenePalette(theme: Theme, triad: Triad): ScenePalette {
+  const [c1, c2, c3] = triad;
   if (theme === 'light') {
     return {
       bg: '#f3f3fb',
-      colorA: '#7c3aed',
-      colorB: '#0ea5e9',
-      rim: '#db2777',
-      particle: '#6d28d9',
+      colorA: c1,
+      colorB: c2,
+      rim: c3,
+      particle: adjustLightness(c1, -8),
       ambient: 0.92,
       bloom: false,
       bloomIntensity: 0,
@@ -33,10 +37,10 @@ export function getScenePalette(theme: Theme): ScenePalette {
   }
   return {
     bg: '#06060d',
-    colorA: '#7c3aed',
-    colorB: '#22d3ee',
-    rim: '#f472b6',
-    particle: '#a78bfa',
+    colorA: c1,
+    colorB: c2,
+    rim: c3,
+    particle: adjustLightness(c1, 14),
     ambient: 0.5,
     bloom: true,
     bloomIntensity: 0.85,

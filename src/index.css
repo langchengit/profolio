@@ -45,9 +45,9 @@
   --text: #15131f;
   --muted: #514f66;
   --faint: #87859b;
-  --accent: #6d28d9;
-  --accent-2: #0e8aa8;
-  --accent-3: #db2777;
+  --accent: #ec1d1d;
+  --accent-2: #f59e0b;
+  --accent-3: #e82183;
 }
 
 [data-theme='dark'] {
@@ -61,9 +61,9 @@
   --text: #ecebf7;
   --muted: #a8a5c0;
   --faint: #6d6a86;
-  --accent: #8b5cf6;
-  --accent-2: #22d3ee;
-  --accent-3: #f472b6;
+  --accent: #f04c4c;
+  --accent-2: #f7b545;
+  --accent-3: #ed4f9d;
 }
 
 * {
