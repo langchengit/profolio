@@ -19,9 +19,9 @@ export interface Preset {
 
 /** Curated multi-hue triads. The first is the site default. */
 export const PRESETS: Preset[] = [
+  { id: 'sunset', name: 'Sunset', triad: ['#fb7185', '#f97316', '#facc15'] },
   { id: 'ember', name: 'Ember', triad: ['#ef4444', '#f59e0b', '#ec4899'] },
   { id: 'aurora', name: 'Aurora', triad: ['#7c3aed', '#22d3ee', '#f472b6'] },
-  { id: 'sunset', name: 'Sunset', triad: ['#fb7185', '#f97316', '#facc15'] },
   { id: 'ocean', name: 'Ocean', triad: ['#0ea5e9', '#6366f1', '#06b6d4'] },
   { id: 'forest', name: 'Forest', triad: ['#10b981', '#84cc16', '#14b8a6'] },
   { id: 'slate', name: 'Slate', triad: ['#64748b', '#0ea5e9', '#94a3b8'] },
