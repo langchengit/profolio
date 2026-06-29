@@ -1,7 +1,42 @@
-import { Code2 } from 'lucide-react';
+import type { ComponentType } from 'react';
+import { Boxes, Code2, Puzzle, Sigma, Trophy, Workflow } from 'lucide-react';
+import {
+  SiCplusplus,
+  SiDevpost,
+  SiGit,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiNodedotjs,
+  SiPython,
+  SiTailwindcss,
+  SiVercel,
+} from 'react-icons/si';
+import { DiJava } from 'react-icons/di';
+import { VscVscode } from 'react-icons/vsc';
 import { skills } from '../data/resume';
 import { Section } from './Section';
 import { Reveal } from './Reveal';
+
+const SKILL_ICONS: Record<string, ComponentType<{ size?: number }>> = {
+  Java: DiJava,
+  'C++': SiCplusplus,
+  Python: SiPython,
+  JavaScript: SiJavascript,
+  'HTML/CSS': SiHtml5,
+  Tailwind: SiTailwindcss,
+  Git: SiGit,
+  NodeJS: SiNodedotjs,
+  GitHub: SiGithub,
+  'VS Code': VscVscode,
+  Vercel: SiVercel,
+  DevPost: SiDevpost,
+  'Data Structures': Boxes,
+  Algorithms: Workflow,
+  'Competitive Programming': Trophy,
+  Mathematics: Sigma,
+  'Problem Solving': Puzzle,
+};
 
 export function Skills() {
   return (
@@ -17,11 +52,15 @@ export function Skills() {
                 </h3>
               </div>
               <div className="mt-4 flex flex-wrap gap-2">
-                {cat.items.map((it) => (
-                  <span key={it} className="chip btn btn-ghost">
-                    {it}
-                  </span>
-                ))}
+                {cat.items.map((it) => {
+                  const Icon = SKILL_ICONS[it];
+                  return (
+                    <span key={it} className="chip btn btn-ghost gap-1.5">
+                      {Icon && <Icon size={14} />}
+                      {it}
+                    </span>
+                  );
+                })}
               </div>
             </article>
           </Reveal>

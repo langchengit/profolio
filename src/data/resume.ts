@@ -148,13 +148,13 @@ export const projects: ProjectEntry[] = [
 export const skills: SkillCategory[] = [
   {
     id: 'languages',
-    label: 'Languages',
-    items: ['Java', 'C++', 'Python', 'JavaScript', 'HTML/CSS'],
+    label: 'Languages and Frameworks',
+    items: ['Java', 'C++', 'Python', 'JavaScript', 'HTML/CSS', 'Tailwind'],
   },
   {
     id: 'tools',
     label: 'Tools & Platforms',
-    items: ['Git', 'GitHub', 'DevPost', 'VS Code', 'NodeJS'],
+    items: ['Git', 'NodeJS', 'GitHub', 'VS Code', 'Vercel', 'DevPost'],
   },
   {
     id: 'strengths',
