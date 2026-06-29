@@ -51,7 +51,7 @@ export function Projects() {
                 {p.affiliation && (
                   <p className="mt-1 text-sm text-muted">{p.affiliation}</p>
                 )}
-                <ul className="mt-4 space-y-2">
+                <ul className="mt-4 flex-1 space-y-2">
                   {(() => {
                     let inSubList = false;
                     return p.bullets.map((b, bi) => {
