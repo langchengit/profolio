@@ -200,7 +200,6 @@ export const awards: AwardCategory[] = [
 
 export const contact: ContactInfo = {
   email: 'minglang.chen@uwaterloo.ca',
-  phone: '+17788892665',
   linkedin: 'https://linkedin.com/in/minglang-chen',
   github: '',
   location: 'Vancouver, BC',

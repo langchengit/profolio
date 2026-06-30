@@ -1,18 +1,9 @@
 import type { ReactNode } from 'react';
-import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
+import { ArrowUpRight, Mail, MapPin } from 'lucide-react';
 import { contact } from '../data/resume';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import { Section } from './Section';
 import { Reveal } from './Reveal';
-
-function formatPhone(p: string): string {
-  const m = p.replace(/[^\d+]/g, '');
-  if (m.startsWith('+1') && m.length === 12) {
-    const d = m.slice(2);
-    return `+1 ${d.slice(0, 3)} ${d.slice(3, 6)} ${d.slice(6)}`;
-  }
-  return p;
-}
 
 function ContactLink({
   href,
@@ -67,7 +58,7 @@ export function Contact() {
         <div className="card p-8 sm:p-12">
           <p className="max-w-xl text-lg text-muted">
             I'm always open to new opportunities, collaborations, and good
-            conversations. The fastest way to reach me is email.
+            conversations.
           </p>
 
           <a
@@ -94,14 +85,6 @@ export function Contact() {
                 label="GitHub"
                 value="Follow"
                 external
-              />
-            )}
-            {contact.phone && (
-              <ContactLink
-                href={`tel:${contact.phone}`}
-                icon={<Phone size={18} />}
-                label="Phone"
-                value={formatPhone(contact.phone)}
               />
             )}
             <ContactLink
