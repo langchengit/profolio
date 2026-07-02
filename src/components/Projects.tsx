@@ -1,31 +1,9 @@
 import { Cpu, ExternalLink } from 'lucide-react';
 import { GithubIcon, ImageIcon } from './BrandIcons';
 import { projects } from '../data/resume';
+import { renderBulletText } from '../lib/bullets';
 import { Section } from './Section';
 import { Reveal } from './Reveal';
-
-const DOMAIN_PATTERN = /\b[a-z0-9-]+\.(?:com|org|net|io|dev|co)\b/gi;
-
-function renderBulletText(text: string) {
-  return text.split(DOMAIN_PATTERN).reduce((acc: React.ReactNode[], part, idx, arr) => {
-    acc.push(part);
-    const match = text.match(DOMAIN_PATTERN)?.[idx];
-    if (match && idx < arr.length - 1) {
-      acc.push(
-        <a
-          key={idx}
-          href={`https://${match}`}
-          target="_blank"
-          rel="noreferrer"
-          className="text-accent underline-offset-2 hover:underline"
-        >
-          {match}
-        </a>
-      );
-    }
-    return acc;
-  }, []);
-}
 
 export function Projects() {
   const multiple = projects.length > 1;

@@ -1,5 +1,6 @@
 import { MapPin } from 'lucide-react';
 import { experience } from '../data/resume';
+import { renderBulletText } from '../lib/bullets';
 import { Section } from './Section';
 import { Reveal } from './Reveal';
 
@@ -22,12 +23,33 @@ export function Experience() {
                 <MapPin size={13} /> {e.location}
               </p>
               <ul className="mt-4 space-y-2">
-                {e.bullets.map((b, bi) => (
-                  <li key={bi} className="flex gap-2.5 text-sm leading-relaxed text-muted">
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                    <span>{b}</span>
-                  </li>
-                ))}
+                {(() => {
+                  let inSubList = false;
+                  return e.bullets.map((b, bi) => {
+                    const isHeader = b.trim().endsWith(':');
+                    const isSub = inSubList && !isHeader;
+                    if (isHeader) inSubList = true;
+                    return (
+                      <li
+                        key={bi}
+                        className={`flex gap-2.5 text-sm leading-relaxed text-muted ${
+                          isSub ? 'ml-5' : ''
+                        } ${isHeader && bi > 0 ? 'mt-3' : ''}`}
+                      >
+                        {!isHeader && (
+                          <span
+                            className={`shrink-0 rounded-full bg-accent ${
+                              isSub ? 'mt-2 h-0.5 w-0.5' : 'mt-2 h-1 w-1'
+                            }`}
+                          />
+                        )}
+                        <span className={isHeader ? 'font-medium text-foreground' : ''}>
+                          {renderBulletText(b)}
+                        </span>
+                      </li>
+                    );
+                  });
+                })()}
               </ul>
               <div className="mt-4 flex flex-wrap gap-2">
                 {e.tags.map((t) => (

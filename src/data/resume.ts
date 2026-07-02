@@ -59,9 +59,15 @@ export const experience: ExperienceEntry[] = [
     start: 'Sept 2024',
     end: 'Present',
     bullets: [
-      'Co-organized vsHacks 2025, a two-day online hackathon for Vancouver high-schoolers, drawing 100+ participants and $3K from 5 sponsors',
-      'Led sponsorship outreach, managed the DevPost registration portal, and maintained the event website',
-      'Ran a GitHub workshop for beginner participants and served on the judging panel; currently leading outreach and planning for vsHacks 2026 (July 2026)',
+      'Organizer of vsHacks 2025 and 2026',
+      'Maintain and build [vsHacks website](https://vshacks.com/)',
+      '[vsHacks 2025](https://vshacks-2025.devpost.com/):',
+      'Co-organized a two-day online hackathon for Vancouver high-schoolers, drawing 80+ participants and $3K from 5 sponsors',
+      'Led sponsorship outreach and managed the DevPost registration portal',
+      'Ran a GitHub workshop for beginner participants and served on the judging panel',
+      '[vsHacks 2026](https://vshacks-2026.devpost.com/):',
+      'Currently leading outreach and planning for vsHacks 2026, organized meetings with judges, workshop leaders, and career speakers',
+      'Developed the registration system for a hackathon Discord bot using discord.js slash commands and PostgreSQL, supporting sign-up, unregistration, and role/participant management with structured data (name, email, school, grade)',
     ],
   },
   {
