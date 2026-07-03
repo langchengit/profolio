@@ -373,7 +373,9 @@ export function MazeCanvas() {
       className="h-full w-full"
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
-        const inZone = (e.clientX - rect.left) / rect.width >= 0.50;
+        const mx = (e.clientX - rect.left) / rect.width;
+        const my = (e.clientY - rect.top)  / rect.height;
+        const inZone = mx >= 0.50 && mx <= 0.88 && my <= 0.78;
         inZoneRef.current = inZone;
         if (!isDraggingRef.current) setOrbitEnabled(inZone);
       }}
