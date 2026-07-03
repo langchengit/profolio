@@ -9,7 +9,6 @@ import { usePerfTier, prefersReducedMotion } from '../lib/perf';
 import { initSignals } from '../lib/signals';
 import type { ScenePalette } from '../lib/palette';
 import type { PerfTier } from '../lib/perf';
-import { Blob } from './Blob';
 import { Particles } from './Particles';
 
 /** Read the base accent triad the UI published on <html> (set before paint by
@@ -39,7 +38,6 @@ function Scene({
   return (
     <>
       <Particles palette={palette} tier={tier} reduceMotion={reduceMotion} />
-      <Blob palette={palette} tier={tier} reduceMotion={reduceMotion} />
       <AdaptiveDpr pixelated={false} />
       {useBloom && (
         <EffectComposer>
