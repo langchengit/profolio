@@ -273,7 +273,7 @@ function useMazeCtx() { return useContext(MazeCtx)!; }
 const ALGOS: { id: Algo; label: string; short: string; color: string }[] = [
   { id: 'dfs',    label: 'Depth-First',   short: 'DFS',    color: '#f97316' },
   { id: 'bfs',    label: 'Breadth-First', short: 'BFS',    color: '#22d3ee' },
-  { id: 'greedy', label: 'Best-First',    short: 'Greedy',   color: '#a78bfa' },
+  { id: 'greedy', label: 'Shortest-Distance-First',    short: 'Greedy',   color: '#a78bfa' },
 ];
 
 const LEGEND: [string, string][] = [
@@ -375,7 +375,7 @@ export function MazeCanvas() {
         const rect = e.currentTarget.getBoundingClientRect();
         const mx = (e.clientX - rect.left) / rect.width;
         const my = (e.clientY - rect.top)  / rect.height;
-        const inZone = mx >= 0.50 && mx <= 0.88 && my <= 0.78;
+        const inZone = mx >= 0.56 && mx <= 0.88 && my <= 0.78;
         inZoneRef.current = inZone;
         if (!isDraggingRef.current) setOrbitEnabled(inZone);
       }}

@@ -12,7 +12,7 @@ export function Header() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-4 lg:max-w-none lg:px-14">
         <a
           href="#home"
           onClick={() => setOpen(false)}
@@ -27,7 +27,7 @@ export function Header() {
             <a
               key={item.id}
               href={`#${item.id}`}
-              className={`rounded-full px-3.5 py-1.5 text-sm transition ${
+              className={`rounded-full px-3.5 py-1.5 text-sm lg:text-base transition ${
                 active === item.id
                   ? 'bg-accent/15 text-accent'
                   : 'text-muted hover:text-text'

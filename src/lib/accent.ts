@@ -17,14 +17,15 @@ export interface Preset {
   triad: Triad;
 }
 
-/** Curated multi-hue triads. The first is the site default. */
+/** Curated multi-hue triads. The first is the site default.
+ *  Primaries span the hue wheel ~50°+ apart so solid swatches are all distinct. */
 export const PRESETS: Preset[] = [
-  { id: 'sunset', name: 'Sunset', triad: ['#fb7185', '#f97316', '#facc15'] },
-  { id: 'ember', name: 'Ember', triad: ['#ef4444', '#f59e0b', '#ec4899'] },
-  { id: 'aurora', name: 'Aurora', triad: ['#7c3aed', '#22d3ee', '#f472b6'] },
-  { id: 'ocean', name: 'Ocean', triad: ['#0ea5e9', '#6366f1', '#06b6d4'] },
-  { id: 'forest', name: 'Forest', triad: ['#10b981', '#84cc16', '#14b8a6'] },
-  { id: 'slate', name: 'Slate', triad: ['#64748b', '#0ea5e9', '#94a3b8'] },
+  { id: 'sunset',  name: 'Sunset',  triad: ['#f43f5e', '#f97316', '#facc15'] }, // rose   ~351°
+  { id: 'ember',   name: 'Ember',   triad: ['#f59e0b', '#ef4444', '#f43f5e'] }, // amber   ~45°
+  { id: 'forest',  name: 'Forest',  triad: ['#22c55e', '#10b981', '#84cc16'] }, // green  ~142°
+  { id: 'ocean',   name: 'Ocean',   triad: ['#06b6d4', '#0ea5e9', '#22d3ee'] }, // cyan   ~186°
+  { id: 'aurora',  name: 'Aurora',  triad: ['#6366f1', '#7c3aed', '#8b5cf6'] }, // indigo ~239°
+  { id: 'twilight',name: 'Twilight',triad: ['#a855f7', '#ec4899', '#f472b6'] }, // purple ~291°
 ];
 
 const DEFAULT = PRESETS[0];

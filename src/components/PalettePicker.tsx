@@ -3,12 +3,6 @@ import { Check, Palette } from 'lucide-react';
 import { useTheme } from '../lib/theme';
 import { PRESETS, normalizeForTheme, useAccent } from '../lib/accent';
 
-/** Build a CSS gradient preview of a triad, normalized for the active theme. */
-function swatchGradient(triad: readonly string[], theme: 'light' | 'dark') {
-  const [a, b, c] = triad.map((x) => normalizeForTheme(x, theme));
-  return `linear-gradient(135deg, ${a} 0%, ${b} 50%, ${c} 100%)`;
-}
-
 export function PalettePicker() {
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -80,7 +74,7 @@ export function PalettePicker() {
                       ? 'border-accent ring-2 ring-accent/40'
                       : 'border-border hover:border-border-strong'
                   }`}
-                  style={{ background: swatchGradient(p.triad, theme) }}
+                  style={{ background: normalizeForTheme(p.triad[0], theme) }}
                 >
                   {selected && (
                     <Check size={18} className="text-white drop-shadow" strokeWidth={3} />
