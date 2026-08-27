@@ -55,9 +55,11 @@ export function Hero() {
               <span className="text-gradient">{headline}</span>
             </p>
 
+            {/* The sub-tagline points at the maze, so it hides below `lg` — the
+                same breakpoint that hides MazeCanvas above. */}
             {sub && (
               <p
-                className="intro mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
+                className="intro mt-4 hidden max-w-xl text-base leading-relaxed text-muted sm:text-lg lg:block"
                 style={{ animationDelay: '0.28s' }}
               >
                 {sub}
