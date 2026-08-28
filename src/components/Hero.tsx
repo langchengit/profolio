@@ -1,4 +1,4 @@
-import { ArrowDown, Mail, MapPin } from 'lucide-react';
+import { Mail, MapPin } from 'lucide-react';
 import { contact, personal } from '../data/resume';
 import { LinkedinIcon } from './BrandIcons';
 import { MazeProvider, MazeCanvas, MazeControls } from '../three/Maze';
@@ -108,14 +108,6 @@ export function Hero() {
 
         </div>
       </div>
-
-      <a
-        href="#experience"
-        aria-label="Scroll to content"
-        className="absolute bottom-7 left-1/2 hidden -translate-x-1/2 text-muted transition hover:text-accent lg:block"
-      >
-        <ArrowDown size={20} className="animate-bounce" />
-      </a>
     </section>
     </MazeProvider>
   );
