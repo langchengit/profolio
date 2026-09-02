@@ -20,7 +20,7 @@ export function Hero() {
     <MazeProvider>
     <section
       id="home"
-      className="relative flex min-h-[100svh] items-end px-8 pb-28 sm:px-12 lg:items-center lg:px-16 lg:pb-0"
+      className="relative flex min-h-[100svh] items-end px-8 pb-28 pt-24 sm:px-12 sm:pt-28 lg:items-center lg:px-16 lg:pb-0 lg:pt-0"
     >
       {/* Full-hero transparent canvas — left column at z-10 wins pointer events over canvas at z-2 */}
       <div className="pointer-events-auto absolute inset-0 z-2 hidden lg:block">

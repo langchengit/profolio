@@ -278,9 +278,9 @@ function tint(hex: string, alpha: number): string {
 }
 
 const ALGOS: { id: Algo; label: string; short: string; color: string }[] = [
-  { id: 'dfs',    label: 'Depth-First',   short: 'DFS',    color: '#f97316' },
-  { id: 'bfs',    label: 'Breadth-First', short: 'BFS',    color: '#22d3ee' },
-  { id: 'greedy', label: 'Shortest-Distance-First',    short: 'Greedy',   color: '#a78bfa' },
+  { id: 'dfs',    label: 'Depth-First Search',   short: 'DFS',    color: '#f97316' },
+  { id: 'bfs',    label: 'Breadth-First Search', short: 'BFS',    color: '#22d3ee' },
+  { id: 'greedy', label: 'Direct-Distance-First Search',    short: 'Greedy',   color: '#a78bfa' },
 ];
 
 const LEGEND: [string, string][] = [

@@ -155,27 +155,31 @@ body {
 
 /* ---------- Reusable UI primitives ---------- */
 /* Outlined accent button: the header's "talk to me", shared with the hero's
-   actions so every call to action reads the same. Square, like the panels. */
-.btn-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: 1px solid var(--accent);
-  padding: 0.85rem 1.4rem;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--accent);
-  cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease;
-}
-.btn-cta:hover {
-  background: var(--accent);
-  color: var(--bg);
+   actions so every call to action reads the same. Square, like the panels.
+   Wrapped in @layer components so Tailwind utilities (e.g. `hidden`) — which
+   live in the utilities layer — still win over this otherwise-unlayered CSS. */
+@layer components {
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid var(--accent);
+    padding: 0.85rem 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .btn-cta:hover {
+    background: var(--accent);
+    color: var(--bg);
+  }
 }
 
 .card {

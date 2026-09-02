@@ -37,7 +37,7 @@ export function Header() {
           </div>
 
           <div className="flex items-center gap-6 lg:gap-8">
-            <nav className="hidden items-center gap-7 md:flex">
+            <nav className="hidden items-center gap-7 lg:flex">
               {linkItems.map((item) => (
                 <a
                   key={item.id}
@@ -60,7 +60,7 @@ export function Header() {
                 onClick={() => setOpen((v) => !v)}
                 aria-label="Toggle menu"
                 aria-expanded={open}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface text-text backdrop-blur md:hidden"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface text-text backdrop-blur lg:hidden"
               >
                 {open ? <X size={18} /> : <Menu size={18} />}
               </button>
@@ -70,7 +70,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="border-y border-border bg-bg md:hidden">
+        <div className="border-y border-border bg-bg lg:hidden">
           {navItems.map((item) => (
             <a
               key={item.id}
