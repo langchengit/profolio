@@ -5,10 +5,6 @@ import { useTheme, type Theme } from './theme';
 export type Triad = [string, string, string];
 
 const STORAGE_KEY = 'accent';
-/** Dispatched on <html> whenever the base triad changes, so the 3D scene
- *  (a lazy chunk that does NOT import this store) can react without sharing
- *  module state across the chunk boundary. */
-export const ACCENT_EVENT = 'accentchange';
 
 export interface Preset {
   id: string;
@@ -54,7 +50,7 @@ function rgbToHex(r: number, g: number, b: number): string {
   return `#${t(r)}${t(g)}${t(b)}`;
 }
 
-export function hexToHsl(hex: string): [number, number, number] {
+function hexToHsl(hex: string): [number, number, number] {
   const [r, g, b] = hexToRgb(hex).map((v) => v / 255);
   const max = Math.max(r, g, b);
   const min = Math.min(r, g, b);
@@ -72,7 +68,7 @@ export function hexToHsl(hex: string): [number, number, number] {
   return [h, s * 100, l * 100];
 }
 
-export function hslToHex(h: number, s: number, l: number): string {
+function hslToHex(h: number, s: number, l: number): string {
   s /= 100;
   l /= 100;
   const c = (1 - Math.abs(2 * l - 1)) * s;
@@ -91,14 +87,9 @@ export function hslToHex(h: number, s: number, l: number): string {
   return rgbToHex((r + m) * 255, (g + m) * 255, (b + m) * 255);
 }
 
-export function rotateHue(hex: string, deg: number): string {
+function rotateHue(hex: string, deg: number): string {
   const [h, s, l] = hexToHsl(hex);
   return hslToHex(h + deg, s, l);
-}
-
-export function adjustLightness(hex: string, deltaL: number): string {
-  const [h, s, l] = hexToHsl(hex);
-  return hslToHex(h, s, clamp(l + deltaL, 0, 100));
 }
 
 /** Push a color into a readable saturation/lightness band for the given theme,
@@ -112,7 +103,7 @@ export function normalizeForTheme(hex: string, theme: Theme): string {
 }
 
 /** Build a pleasing multi-hue triad from a single custom color. */
-export function deriveCustomTriad(base: string): Triad {
+function deriveCustomTriad(base: string): Triad {
   return [base, rotateHue(base, 35), rotateHue(base, 165)];
 }
 
@@ -123,10 +114,6 @@ function applyTriad(triad: Triad, theme: Theme) {
   const root = document.documentElement;
   const names = ['--accent', '--accent-2', '--accent-3'] as const;
   triad.forEach((c, i) => root.style.setProperty(names[i], normalizeForTheme(c, theme)));
-  // Hand the *base* (un-normalized) triad to the 3D scene via the DOM, so the
-  // lazy Background chunk never has to import this store.
-  root.dataset.accentBase = triad.join(',');
-  window.dispatchEvent(new CustomEvent(ACCENT_EVENT));
 }
 
 function persist(id: string, triad: Triad) {

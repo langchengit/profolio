@@ -8,7 +8,7 @@
       name="description"
       content="Minglang Chen — Software Engineer. An interactive 3D portfolio of work in hardware, competitive programming, and team leadership."
     />
-    <meta name="theme-color" content="#06060d" />
+    <meta name="theme-color" content="#0c0b16" />
     <meta property="og:title" content="Minglang Chen — Portfolio" />
     <meta
       property="og:description"
@@ -27,6 +27,10 @@
           t = 'dark';
         }
         document.documentElement.setAttribute('data-theme', t);
+        // Keep the browser-chrome color in sync on first paint too (applyTheme()
+        // in lib/theme.ts only runs on a toggle).
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', t === 'dark' ? '#0c0b16' : '#f0eee6');
 
         // Mirror of normalizeForTheme() in src/lib/accent.ts — keep bands in sync.
         function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
@@ -81,7 +85,6 @@
               var root = document.documentElement;
               var names = ['--accent', '--accent-2', '--accent-3'];
               for (var i = 0; i < 3; i++) root.style.setProperty(names[i], norm(triad[i], t));
-              root.dataset.accentBase = triad.join(',');
             }
           }
         } catch (e) {}

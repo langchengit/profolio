@@ -16,7 +16,7 @@ function applyTheme(theme: Theme) {
   if (typeof document === 'undefined') return;
   document.documentElement.setAttribute('data-theme', theme);
   const meta = document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', theme === 'dark' ? '#06060d' : '#f3f3fb');
+  if (meta) meta.setAttribute('content', theme === 'dark' ? '#0c0b16' : '#f0eee6');
   try {
     localStorage.setItem(STORAGE_KEY, theme);
   } catch {

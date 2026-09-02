@@ -270,6 +270,13 @@ interface MazeCtx {
 const MazeCtx = createContext<MazeCtx | null>(null);
 function useMazeCtx() { return useContext(MazeCtx)!; }
 
+/** `#rrggbb` to rgba(), for the lit button's background wash. Avoids
+ *  color-mix(), which some browsers render with a shifted hue. */
+function tint(hex: string, alpha: number): string {
+  const n = Number.parseInt(hex.slice(1), 16);
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`;
+}
+
 const ALGOS: { id: Algo; label: string; short: string; color: string }[] = [
   { id: 'dfs',    label: 'Depth-First',   short: 'DFS',    color: '#f97316' },
   { id: 'bfs',    label: 'Breadth-First', short: 'BFS',    color: '#22d3ee' },
@@ -406,6 +413,7 @@ export function MazeCanvas() {
 // ─── Controls — status bar, algo buttons, legend ───────────────────────────────
 export function MazeControls() {
   const { active, done, paused, stats, run, togglePause } = useMazeCtx();
+  const [hovered, setHovered] = useState<Algo | null>(null);
   const activeInfo = ALGOS.find(a => a.id === active);
 
   return (
@@ -416,10 +424,10 @@ export function MazeControls() {
         {active && (
           <span className="font-mono text-xs" style={{ color: activeInfo?.color }}>
             {done
-              ? `${activeInfo?.short} done — ${stats?.explored} cells · path ${stats?.pathLen} steps`
+              ? `${activeInfo?.label} done — ${stats?.explored} cells · path ${stats?.pathLen} steps`
               : paused
-              ? `${activeInfo?.short} paused`
-              : `${activeInfo?.short} searching…`}
+              ? `${activeInfo?.label} paused`
+              : `${activeInfo?.label} searching…`}
           </span>
         )}
         {active && !done && (
@@ -432,25 +440,31 @@ export function MazeControls() {
         )}
       </div>
 
-      {/* Algorithm buttons */}
+      {/* Algorithm buttons: square, neutral at rest, taking on the algorithm's
+          color when hovered or running. No transition. */}
       <div className="pointer-events-auto flex gap-2">
-        {ALGOS.map(({ id, label, short, color }) => (
-          <button
-            key={id}
-            onClick={() => run(id)}
-            className={`group flex flex-1 flex-col items-center rounded-xl border px-3 py-2.5 text-xs transition-all duration-150 ${
-              active === id
-                ? 'border-current bg-current/10'
-                : 'border-border bg-surface text-muted hover:border-current hover:text-foreground hover:bg-current/5 hover:-translate-y-px hover:scale-[1.02] active:scale-[0.98] active:translate-y-0'
-            }`}
-            style={active === id ? { color, borderColor: color } : { ['--tw-border-opacity' as string]: '1', color: 'inherit' }}
-            onMouseEnter={e => { if (active !== id) (e.currentTarget as HTMLButtonElement).style.color = color; (e.currentTarget as HTMLButtonElement).style.borderColor = color; }}
-            onMouseLeave={e => { if (active !== id) { (e.currentTarget as HTMLButtonElement).style.color = ''; (e.currentTarget as HTMLButtonElement).style.borderColor = ''; } }}
-          >
-            <span className="font-mono text-sm font-bold">{short}</span>
-            <span className="mt-0.5 font-sans opacity-60">{label}</span>
-          </button>
-        ))}
+        {ALGOS.map(({ id, label, short, color }) => {
+          const lit = active === id || hovered === id;
+          return (
+            <button
+              key={id}
+              onClick={() => run(id)}
+              onMouseEnter={() => setHovered(id)}
+              onMouseLeave={() => setHovered(null)}
+              className={`flex flex-1 flex-col items-center border px-3 py-2.5 text-xs ${
+                lit ? '' : 'border-border bg-surface text-muted'
+              }`}
+              style={
+                lit
+                  ? { color, borderColor: color, background: tint(color, 0.12) }
+                  : undefined
+              }
+            >
+              <span className="font-mono text-sm font-bold">{short}</span>
+              <span className="mt-0.5 font-sans opacity-60">{label}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* Legend */}

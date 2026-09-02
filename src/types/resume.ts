@@ -1,4 +1,6 @@
 export interface PersonalInfo {
+  /** Line typed out above the name in the hero. */
+  greeting: string;
   name: string;
   tagline: string;
   location: string;

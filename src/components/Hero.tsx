@@ -1,5 +1,6 @@
 import { Mail, MapPin } from 'lucide-react';
 import { contact, personal } from '../data/resume';
+import { useTypewriter } from '../lib/hooks';
 import { LinkedinIcon } from './BrandIcons';
 import { MazeProvider, MazeCanvas, MazeControls } from '../three/Maze';
 
@@ -8,11 +9,18 @@ export function Hero() {
   const headline = headlineRaw.trim();
   const sub = rest.join('—').trim();
 
+  // Greeting and name are typed as one stream and split back by length, so the
+  // caret hands off from the first line to the second.
+  const { typed } = useTypewriter(personal.greeting + personal.name);
+  const onName = typed.length > personal.greeting.length;
+  const typedGreeting = typed.slice(0, personal.greeting.length);
+  const typedName = typed.slice(personal.greeting.length);
+
   return (
     <MazeProvider>
     <section
       id="home"
-      className="relative flex min-h-[100svh] items-end px-6 pb-28 lg:items-center lg:pb-0"
+      className="relative flex min-h-[100svh] items-end px-8 pb-28 sm:px-12 lg:items-center lg:px-16 lg:pb-0"
     >
       {/* Full-hero transparent canvas — left column at z-10 wins pointer events over canvas at z-2 */}
       <div className="pointer-events-auto absolute inset-0 z-2 hidden lg:block">
@@ -26,7 +34,7 @@ export function Hero() {
 
       {/* pointer-events-none on wrapper so the right-half canvas receives events;
           left column restores pointer-events-auto for its links/buttons */}
-      <div className="pointer-events-none relative z-10 mx-auto w-full max-w-6xl">
+      <div className="pointer-events-none relative z-10 mx-auto w-full max-w-5xl">
         <div className="grid items-center gap-10 lg:grid-cols-2">
 
           {/* Left column — text */}
@@ -38,18 +46,36 @@ export function Hero() {
               <MapPin size={13} className="text-accent" /> {personal.location}
             </div>
 
+            <p
+              className="intro font-mono text-sm uppercase tracking-[0.2em] text-muted sm:text-base"
+              style={{ animationDelay: '0.12s' }}
+              aria-hidden="true"
+            >
+              {typedGreeting}
+              {!onName && <span className="caret" />}
+            </p>
+
+            {/* An invisible copy of the full name reserves the line box, so the
+                rest of the hero doesn't jump as the name types in. */}
             <h1
-              className="intro font-display font-bold leading-[1.05] tracking-tight"
+              className="intro relative mt-2 font-display font-bold leading-[1.05] tracking-tight"
               style={{
                 animationDelay: '0.12s',
                 fontSize: 'clamp(3rem, 3.5vw + 2rem, 6rem)',
               }}
+              aria-label={`${personal.greeting} ${personal.name}`}
             >
-              {personal.name}
+              <span className="invisible" aria-hidden="true">
+                {personal.name}
+              </span>
+              <span className="absolute inset-0" aria-hidden="true">
+                {typedName}
+                {onName && <span className="caret" />}
+              </span>
             </h1>
 
             <p
-              className="intro mt-5 text-xl font-medium sm:text-2xl"
+              className="intro mt-5 text-lg font-medium sm:text-xl"
               style={{ animationDelay: '0.2s' }}
             >
               <span className="text-gradient">{headline}</span>
@@ -70,10 +96,10 @@ export function Hero() {
               className="intro mt-9 flex flex-wrap items-center gap-3"
               style={{ animationDelay: '0.36s' }}
             >
-              <a href="#projects" className="btn btn-ghost">
+              <a href="#projects" className="btn-cta">
                 View my work
               </a>
-              <a href="#contact" className="btn btn-ghost">
+              <a href="#contact" className="btn-cta">
                 Get in touch
               </a>
             </div>

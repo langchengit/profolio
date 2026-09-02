@@ -15,7 +15,7 @@ export function Section({ id, index, kicker, title, children, className = '' }: 
   return (
     <section
       id={id}
-      className={`relative mx-auto w-full max-w-6xl scroll-mt-24 px-6 py-24 md:py-32 ${className}`}
+      className={`relative mx-auto w-full max-w-5xl scroll-mt-24 px-8 py-24 sm:px-12 md:py-32 lg:px-16 ${className}`}
     >
       <Reveal className="mb-12 md:mb-16">
         <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">

@@ -52,7 +52,7 @@ export function PalettePicker() {
           id={panelId}
           role="dialog"
           aria-label="Accent color"
-          className="absolute right-0 top-12 z-50 w-64 rounded-2xl border border-border bg-surface-strong p-4 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+          className="absolute left-0 top-12 z-50 w-64 rounded-2xl border border-border bg-surface-strong p-4 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl"
         >
           <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted">
             Accent color
@@ -69,7 +69,7 @@ export function PalettePicker() {
                   title={p.name}
                   aria-label={p.name}
                   aria-pressed={selected}
-                  className={`relative flex h-12 items-center justify-center rounded-xl border transition ${
+                  className={`relative flex h-12 items-center justify-center border transition ${
                     selected
                       ? 'border-accent ring-2 ring-accent/40'
                       : 'border-border hover:border-border-strong'
@@ -84,7 +84,7 @@ export function PalettePicker() {
             })}
           </div>
 
-          <label className="mt-4 flex cursor-pointer items-center justify-between gap-3 rounded-xl border border-border px-3 py-2.5 transition hover:border-border-strong">
+          <label className="mt-4 flex cursor-pointer items-center justify-between gap-3 border border-border px-3 py-2.5 transition hover:border-border-strong">
             <span className="flex items-center gap-2 text-sm text-text">
               <span
                 className="h-5 w-5 rounded-full border border-border-strong"

@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { Boxes, Code2, Puzzle, Sigma, Trophy, Workflow } from 'lucide-react';
+import { Boxes, Puzzle, Sigma, Trophy, Workflow } from 'lucide-react';
 import {
   SiCplusplus,
   SiDevpost,
@@ -16,7 +16,7 @@ import { DiJava } from 'react-icons/di';
 import { VscVscode } from 'react-icons/vsc';
 import { skills } from '../data/resume';
 import { Section } from './Section';
-import { Reveal } from './Reveal';
+import { MetaRow, Panel, PanelRow, Tag, TagRow } from './Panel';
 
 const SKILL_ICONS: Record<string, ComponentType<{ size?: number }>> = {
   Java: DiJava,
@@ -41,31 +41,26 @@ const SKILL_ICONS: Record<string, ComponentType<{ size?: number }>> = {
 export function Skills() {
   return (
     <Section id="skills" index="04" kicker="My toolkit" title="Skills">
-      <div className="grid gap-5 md:grid-cols-3">
+      {/* Categories aren't a sequence, so no connecting line — the category
+          label takes the meta slot and the items are the tag row. */}
+      <Panel>
         {skills.map((cat, i) => (
-          <Reveal key={cat.id} delay={i * 70} className="h-full">
-            <article className="card h-full p-6">
-              <div className="flex items-center gap-2 text-accent">
-                <Code2 size={18} />
-                <h3 className="font-display text-base font-semibold text-text">
-                  {cat.label}
-                </h3>
-              </div>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {cat.items.map((it) => {
-                  const Icon = SKILL_ICONS[it];
-                  return (
-                    <span key={it} className="chip btn btn-ghost gap-1.5">
-                      {Icon && <Icon size={14} />}
-                      {it}
-                    </span>
-                  );
-                })}
-              </div>
-            </article>
-          </Reveal>
+          <PanelRow key={cat.id} index={i}>
+            <MetaRow left={cat.label} right={`${cat.items.length} items`} />
+            <TagRow className="mt-5">
+              {cat.items.map((it) => {
+                const Icon = SKILL_ICONS[it];
+                return (
+                  <Tag key={it}>
+                    {Icon && <Icon size={13} />}
+                    {it}
+                  </Tag>
+                );
+              })}
+            </TagRow>
+          </PanelRow>
         ))}
-      </div>
+      </Panel>
     </Section>
   );
 }

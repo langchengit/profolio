@@ -12,9 +12,10 @@ import taskManagerThumnail from '../assets/task-manager-report.png';
 
 // photoUrl left blank until a real photo is provided — UI falls back to initials.
 export const personal: PersonalInfo = {
+  greeting: 'Hi, my name is',
   name: 'Minglang Chen',
   tagline:
-    'Incoming Software Engineering Student @ University of Waterloo — Refresh to get a different maze :)',
+    'Software Engineering Student @ UWaterloo — Refresh to get a different maze :)',
   location: 'Vancouver, BC',
   photoUrl: '',
 };
@@ -33,8 +34,8 @@ export const education: EducationEntry[] = [
     id: 'ubc',
     school: 'University of British Columbia',
     credential: 'Access Studies in Mathematics',
-    detail: 'A+ in MATH 200',
-    location: 'Vancouver, BC',
+    detail: 'A+ in MATH 200: Multivariable Calculus',
+    location: 'Waterloo, ON',
     start: 'Sep 2025',
     end: 'Dec 2025',
   },
@@ -63,12 +64,12 @@ export const experience: ExperienceEntry[] = [
       'Maintain and build [vsHacks website](https://vshacks.com/)',
       '[vsHacks 2026](https://vshacks-2026.devpost.com/) | Vice Chair:',
       'Scaled the event to 400+ participants and $4K+ in sponsorship, owning outreach, web, GitHub, and operations',
-      'Led sponsorship outreach, managed the Devpost registration portal, and maintained the event website',
-      'Developed a Discord bot to automate user registration and tag assignment, and served on the judging panel',
+      'Led sponsorship outreach, managed the Devpost registration portal, developed & maintained the event website, and served on the judging panel',
+      'Developed a Discord bot to automate user registration and tag assignment',
       'Hosted a career advising workshop featuring a Machine Learning Engineer from Microsoft, managing event logistics and attendee engagement',
       '[vsHacks 2025](https://vshacks-2025.devpost.com/) | Organizer:',
       'Co-organized vsHacks 2025, a two-day online hackathon for high-schoolers, drawing 100+ participants and $3K in sponsorship from 5 companies',
-      'Led sponsorship outreach, managed the Devpost registration portal, and maintained the event website',
+      'Led sponsorship outreach, managed the Devpost registration portal, developed & maintained the event website',
       'Ran a GitHub workshop for beginner participants as part of a multi-track workshop program, served on the judging panel, and coordinated prize announcements and distribution',
     ],
   },
@@ -96,6 +97,7 @@ export const experience: ExperienceEntry[] = [
     end: 'June 2026',
     bullets: [
       'Conducted weekly meetings and delivered lectures',
+      'Researched physics topics such as NFC and took apart consumer electronics, including a Google Pixel phone and a projector, to prepare hands-on lectures for club members',
       'Coordinated and led teams in competitions including FYKOS, the Kwantlen Science Challenge, and UBC Physics Olympics',
     ],
   },
@@ -108,7 +110,8 @@ export const experience: ExperienceEntry[] = [
     start: 'Sep 2024',
     end: 'Jun 2025',
     bullets: [
-      'Mentored the Grade 8 Math Challengers team while in Grade 11, hosting regular practice sessions and teaching new concepts',
+      'Mentored the Grade 8 Math Challengers team while in Grade 11',
+      'Hosted regular practice sessions and taught new concepts',
       'Team placed 2nd at the Math Challengers Regional competition',
     ],
   },

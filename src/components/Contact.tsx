@@ -1,100 +1,47 @@
-import type { ReactNode } from 'react';
-import { ArrowUpRight, Mail, MapPin } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { contact } from '../data/resume';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import { Section } from './Section';
-import { Reveal } from './Reveal';
+import { MetaRow, Panel, PanelRow, TitleRow } from './Panel';
 
-function ContactLink({
-  href,
-  icon,
-  label,
-  value,
-  external,
-}: {
-  href?: string;
-  icon: ReactNode;
-  label: string;
-  value: string;
-  external?: boolean;
-}) {
-  const inner = (
-    <>
-      <span className="text-accent">{icon}</span>
-      <span className="min-w-0">
-        <span className="block font-mono text-[11px] uppercase tracking-wider text-faint">
-          {label}
-        </span>
-        <span className="block truncate text-sm text-text">{value}</span>
-      </span>
-      {href && (
-        <ArrowUpRight
-          size={15}
-          className="ml-auto text-faint transition group-hover:text-accent"
-        />
-      )}
-    </>
-  );
-
-  if (!href) {
-    return <div className="card flex items-center gap-3 p-4">{inner}</div>;
-  }
-  return (
-    <a
-      href={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noreferrer' : undefined}
-      className="card group flex items-center gap-3 p-4"
-    >
-      {inner}
-    </a>
-  );
-}
+const LINK = 'inline-flex items-center gap-1.5 transition hover:text-accent';
 
 export function Contact() {
   return (
     <Section id="contact" index="06" kicker="Say hello" title="Let's connect">
-      <Reveal>
-        <div className="card p-8 sm:p-12">
-          <p className="max-w-xl text-lg text-muted">
+      <Panel>
+        <PanelRow index={0}>
+          <MetaRow left="Email" right={contact.location} />
+          <TitleRow
+            title={
+              <a
+                href={`mailto:${contact.email}`}
+                className="break-words transition hover:text-accent"
+              >
+                {contact.email}
+              </a>
+            }
+            aside={
+              <div className="flex flex-wrap gap-x-4 gap-y-1 sm:justify-end">
+                {contact.linkedin && (
+                  <a href={contact.linkedin} target="_blank" rel="noreferrer" className={LINK}>
+                    <LinkedinIcon size={15} /> LinkedIn <ArrowUpRight size={13} />
+                  </a>
+                )}
+                {contact.github && (
+                  <a href={contact.github} target="_blank" rel="noreferrer" className={LINK}>
+                    <GithubIcon size={15} /> GitHub <ArrowUpRight size={13} />
+                  </a>
+                )}
+              </div>
+            }
+          />
+          <p className="mt-4 max-w-2xl leading-relaxed text-muted">
             I'm always open to new opportunities, collaborations, and good
             conversations.
           </p>
-
-          <a
-            href={`mailto:${contact.email}`}
-            className="btn btn-ghost mt-7 text-base"
-          >
-            <Mail size={18} /> {contact.email}
-          </a>
-
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {contact.linkedin && (
-              <ContactLink
-                href={contact.linkedin}
-                icon={<LinkedinIcon size={18} />}
-                label="LinkedIn"
-                value="Connect"
-                external
-              />
-            )}
-            {contact.github && (
-              <ContactLink
-                href={contact.github}
-                icon={<GithubIcon size={18} />}
-                label="GitHub"
-                value="Follow"
-                external
-              />
-            )}
-            <ContactLink
-              icon={<MapPin size={18} />}
-              label="Location"
-              value={contact.location}
-            />
-          </div>
-        </div>
-      </Reveal>
+        </PanelRow>
+      </Panel>
     </Section>
   );
 }
