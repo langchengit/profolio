@@ -5,6 +5,8 @@ export interface PersonalInfo {
   tagline: string;
   location: string;
   photoUrl: string;
+  /** Shown in the notification bar above the hero's location badge. */
+  availability: string;
 }
 
 export interface EducationEntry {

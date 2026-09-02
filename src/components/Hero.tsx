@@ -39,11 +39,26 @@ export function Hero() {
 
           {/* Left column — text */}
           <div className="pointer-events-auto hero-legible">
-            <div
-              className="intro mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-muted backdrop-blur"
-              style={{ animationDelay: '0.05s' }}
-            >
-              <MapPin size={13} className="text-accent" /> {personal.location}
+            {/* flex-col + items-start: two stacked pills, each sized to its own
+                content rather than the adjacent-inline-elements default. */}
+            <div className="mb-6 flex flex-col items-start gap-3">
+              <div
+                className="intro inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 text-xs text-muted backdrop-blur"
+                style={{ animationDelay: '0s' }}
+              >
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
+                {personal.availability}
+              </div>
+
+              <div
+                className="intro inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-muted backdrop-blur"
+                style={{ animationDelay: '0.05s' }}
+              >
+                <MapPin size={13} className="text-accent" /> {personal.location}
+              </div>
             </div>
 
             <p

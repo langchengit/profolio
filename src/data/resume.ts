@@ -16,8 +16,9 @@ export const personal: PersonalInfo = {
   name: 'Minglang Chen',
   tagline:
     'Software Engineering Student @ UWaterloo — Refresh to get a different maze :)',
-  location: 'Vancouver, BC',
+  location: 'Waterloo | Vancouver | Shanghai',
   photoUrl: '',
+  availability: 'Looking for Summer 2027 internships ',
 };
 
 export const education: EducationEntry[] = [
@@ -122,7 +123,7 @@ export const projects: ProjectEntry[] = [
     id: 'line-following-vehicle',
     name: 'Autonomous Line-Following Vehicle',
     affiliation: 'University Hill Secondary School',
-    location: 'Waterloo / Vancouver',
+    location: 'Vancouver, BC',
     tags: ['Arduino', 'C++', 'Embedded Hardware'],
     bullets: [
       'Built an autonomous car that follows black-tape paths with IR sensors and avoids obstacles using an ultrasonic sensor',
