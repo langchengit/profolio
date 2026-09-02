@@ -16,7 +16,6 @@ export interface Preset {
 /** Curated multi-hue triads. The first is the site default.
  *  Primaries span the hue wheel ~50°+ apart so solid swatches are all distinct. */
 export const PRESETS: Preset[] = [
-  { id: 'sunset',  name: 'Sunset',  triad: ['#f43f5e', '#f97316', '#facc15'] }, // rose   ~351°
   { id: 'ember',   name: 'Ember',   triad: ['#f59e0b', '#ef4444', '#f43f5e'] }, // amber   ~45°
   { id: 'forest',  name: 'Forest',  triad: ['#22c55e', '#10b981', '#84cc16'] }, // green  ~142°
   { id: 'ocean',   name: 'Ocean',   triad: ['#06b6d4', '#0ea5e9', '#22d3ee'] }, // cyan   ~186°

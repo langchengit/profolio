@@ -441,7 +441,8 @@ export function MazeControls() {
       </div>
 
       {/* Algorithm buttons: square, neutral at rest, taking on the algorithm's
-          color when hovered or running. No transition. */}
+          color when hovered or running. `transition` matches the duration
+          every other button on the site uses for its color/border change. */}
       <div className="pointer-events-auto flex gap-2">
         {ALGOS.map(({ id, label, short, color }) => {
           const lit = active === id || hovered === id;
@@ -451,7 +452,7 @@ export function MazeControls() {
               onClick={() => run(id)}
               onMouseEnter={() => setHovered(id)}
               onMouseLeave={() => setHovered(null)}
-              className={`flex flex-1 flex-col items-center border px-3 py-2.5 text-xs ${
+              className={`flex flex-1 flex-col items-center border px-3 py-2.5 text-xs transition ${
                 lit ? '' : 'border-border bg-surface text-muted'
               }`}
               style={
@@ -461,7 +462,11 @@ export function MazeControls() {
               }
             >
               <span className="font-mono text-sm font-bold">{short}</span>
-              <span className="mt-0.5 font-sans opacity-60">{label}</span>
+              <span className="mt-0.5 text-center font-sans opacity-60">
+                {label.replace(/ Search$/, '')}
+                <br />
+                Search
+              </span>
             </button>
           );
         })}

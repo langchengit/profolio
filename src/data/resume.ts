@@ -122,7 +122,7 @@ export const projects: ProjectEntry[] = [
     id: 'line-following-vehicle',
     name: 'Autonomous Line-Following Vehicle',
     affiliation: 'University Hill Secondary School',
-    location: 'Vancouver, BC',
+    location: 'Waterloo / Vancouver',
     tags: ['Arduino', 'C++', 'Embedded Hardware'],
     bullets: [
       'Built an autonomous car that follows black-tape paths with IR sensors and avoids obstacles using an ultrasonic sensor',
