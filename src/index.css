@@ -5,9 +5,9 @@
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
-  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   /* Lowered from Tailwind's default 64rem (1024px) so the hero's side-by-side
      layout (text left, maze right) kicks in on common un-maximized laptop
@@ -73,6 +73,8 @@
 html {
   scroll-behavior: smooth;
   -webkit-tap-highlight-color: transparent;
+  /* Turns on Fira Code's ligatures (->, !=, etc.) wherever font-mono is used. */
+  font-feature-settings: 'liga' 1, 'calt' 1;
 }
 
 html,
