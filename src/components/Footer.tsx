@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="relative z-10 border-t border-border">
       <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-8 py-10 sm:flex-row sm:px-12 lg:px-16">
         <p className="text-sm text-muted">
-          © {year} {personal.name}. Built with React &amp; Three.js.
+          © {year} {personal.name}. Built with React, TypeScript, Three.js &amp; Tailwind CSS.
         </p>
         <a
           href="#home"
