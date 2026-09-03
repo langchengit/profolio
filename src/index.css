@@ -207,6 +207,12 @@ body {
     0 0 6px var(--bg);
 }
 
+/* Buttons already sit on a solid/outlined background, so the legibility halo
+   above just shows up as a smudge around the label — drop it here. */
+.hero-legible .btn-cta {
+  text-shadow: none;
+}
+
 .chip {
   display: inline-flex;
   align-items: center;
