@@ -1,6 +1,7 @@
 import { ExternalLink } from 'lucide-react';
 import { GithubIcon } from './BrandIcons';
 import { projects } from '../data/resume';
+import { getSkillIcon } from '../lib/skillIcons';
 import { Section } from './Section';
 import { Reveal } from './Reveal';
 import { BulletBody, MetaRow, Tag, TagRow, TitleRow } from './Panel';
@@ -40,9 +41,15 @@ export function Projects() {
               />
               <BulletBody bullets={p.bullets} />
               <TagRow>
-                {p.tags.map((t) => (
-                  <Tag key={t}>{t}</Tag>
-                ))}
+                {p.tags.map((t) => {
+                  const Icon = getSkillIcon(t);
+                  return (
+                    <Tag key={t}>
+                      {Icon && <Icon size={12} />}
+                      {t}
+                    </Tag>
+                  );
+                })}
               </TagRow>
             </div>
           </Reveal>
