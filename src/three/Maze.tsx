@@ -1,7 +1,6 @@
 import { useRef, useMemo, useEffect, useState, createContext, useContext } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { generateMaze, ROWS, COLS, START, END, type Grid } from './maze/generate';
 import { runDFS, runBFS, runGreedy, buildResets, type Update, type CellState } from './maze/algorithms';
@@ -24,7 +23,7 @@ function getNeon(theme: Theme): Neon {
     return {
       wall:     [0.82,  0.70,  1.15 ],
       open:     [0.06,  0.05,  0.18 ],  // near-black indigo — deep passages contrast sharply with walls
-      start:    [0.10,  1.20,  0.32 ],
+      start:    [0.005, 0.49,  0.22 ],  // emerald-500 (#10b981), sRGB→linear so setRGB() renders it correctly
       end:      [2.00,  0.10,  0.10 ],
       visited:  [0.55,  0.18,  1.05 ],
       visiting: [0.85,  0.05,  2.30 ],
@@ -34,7 +33,7 @@ function getNeon(theme: Theme): Neon {
   return {
     wall:     [0.65,  0.48,  1.10 ],  // bright lavender-purple — clearly visible in dark
     open:     [0.02,  0.02,  0.07 ],  // near-black — passages clearly recede against walls
-    start:    [0.05,  1.80,  0.30 ],
+    start:    [0.005, 0.49,  0.22 ],  // emerald-500 (#10b981), sRGB→linear so setRGB() renders it correctly
     end:      [1.80,  0.05,  0.05 ],
     visited:  [0.32,  0.06,  0.88 ],
     visiting: [0.78,  0.00,  2.50 ],
@@ -235,16 +234,6 @@ function MazeScene({ grid, animRef, resetRef, pausedRef, done, theme, orbitEnabl
         )}
 
       </group>
-
-      <EffectComposer frameBufferType={THREE.HalfFloatType}>
-        <Bloom
-          mipmapBlur
-          intensity={done ? (light ? 0.2 : 0.4) : (light ? 0.8 : 1.8)}
-          luminanceThreshold={done ? 0.85 : (light ? 0.25 : 0.12)}
-          luminanceSmoothing={0.45}
-          radius={done ? 0.35 : 0.70}
-        />
-      </EffectComposer>
     </>
   );
 }
@@ -284,7 +273,7 @@ const ALGOS: { id: Algo; label: string; short: string; color: string }[] = [
 ];
 
 const LEGEND: [string, string][] = [
-  ['#22c55e', 'Start'],
+  ['#10b981', 'Start'],
   ['#ef4444', 'End'],
   ['#7c3aed', 'Exploring now'],
   ['#4b21a6', 'Visited'],

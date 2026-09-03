@@ -46,10 +46,7 @@ export function Hero() {
                 className="intro inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 text-xs text-muted backdrop-blur"
                 style={{ animationDelay: '0s' }}
               >
-                <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                </span>
+                <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
                 {personal.availability}
               </div>
 
