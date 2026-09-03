@@ -11,13 +11,8 @@ const LINK = 'inline-flex items-center gap-1.5 transition hover:text-accent';
 export function Projects() {
   return (
     <Section id="projects" index="03" kicker="Things I've built" title="Projects">
-      {/* Projects aren't date-ordered, so they sit side by side in one row of
-          cards instead of the dated sections' single-column timeline. */}
-      <div
-        className={`grid border-l border-t border-border ${
-          projects.length > 1 ? 'sm:grid-cols-2' : ''
-        }`}
-      >
+      {/* One project per row. */}
+      <div className="grid border-l border-t border-border">
         {projects.map((p, i) => (
           <Reveal key={p.id} delay={i * 60} className="border-b border-r border-border">
             <div className="h-full p-6 sm:p-8">
