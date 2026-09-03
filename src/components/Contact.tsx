@@ -8,7 +8,7 @@ const LINK = 'inline-flex items-center gap-1.5 transition hover:text-accent';
 
 export function Contact() {
   return (
-    <Section id="contact" index="06" kicker="Say hello" title="Let's connect">
+    <Section id="contact" index="06" kicker="" title="Contact">
       <Panel>
         <PanelRow index={0}>
           <MetaRow left="Email" right={contact.location} />

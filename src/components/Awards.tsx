@@ -5,7 +5,7 @@ import { Reveal } from './Reveal';
 
 export function Awards() {
   return (
-    <Section id="awards" index="05" kicker="Recognition" title="Awards">
+    <Section id="awards" index="05" kicker="" title="Awards">
       {/* Categories aren't a sequence, so they sit side by side as their own
           columns instead of stacking as timeline rows. */}
       <div className="grid gap-8 sm:grid-cols-3">

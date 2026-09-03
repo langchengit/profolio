@@ -40,7 +40,7 @@ const SKILL_ICONS: Record<string, ComponentType<{ size?: number }>> = {
 
 export function Skills() {
   return (
-    <Section id="skills" index="04" kicker="My toolkit" title="Skills">
+    <Section id="skills" index="04" kicker="" title="Skills">
       {/* Categories aren't a sequence, so no connecting line — the category
           label takes the meta slot and the items are the tag row. */}
       <Panel>

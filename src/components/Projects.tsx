@@ -10,7 +10,7 @@ const LINK = 'inline-flex items-center gap-1.5 transition hover:text-accent';
 
 export function Projects() {
   return (
-    <Section id="projects" index="03" kicker="Things I've built" title="Projects">
+    <Section id="projects" index="03" kicker="" title="Projects">
       {/* One project per row. */}
       <div className="grid border-l border-t border-border">
         {projects.map((p, i) => (

@@ -4,7 +4,7 @@ import { BulletBody, MetaRow, Panel, PanelRow, Tag, TagRow, TitleRow } from './P
 
 export function Experience() {
   return (
-    <Section id="experience" index="01" kicker="What I've done" title="Experience">
+    <Section id="experience" index="01" kicker="" title="Experience">
       {/* One panel for the whole run of roles: each row's rail lines up with the
           next, so the timeline reads as a single line through the stack. */}
       <Panel>
