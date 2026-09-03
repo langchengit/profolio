@@ -180,6 +180,16 @@ body {
     background: var(--accent);
     color: var(--bg);
   }
+
+  /* Reverse of .btn-cta: filled by default, outlines on hover. */
+  .btn-cta-reverse {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn-cta-reverse:hover {
+    background: transparent;
+    color: var(--accent);
+  }
 }
 
 .card {

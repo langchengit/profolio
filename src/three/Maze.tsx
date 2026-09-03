@@ -52,12 +52,11 @@ interface SceneProps {
   animRef:      React.RefObject<{ updates: Update[]; idx: number }>;
   resetRef:     React.RefObject<Update[] | null>;
   pausedRef:    React.RefObject<boolean>;
-  done:         boolean;
   theme:        Theme;
   orbitEnabled: boolean;
 }
 
-function MazeScene({ grid, animRef, resetRef, pausedRef, done, theme, orbitEnabled }: SceneProps) {
+function MazeScene({ grid, animRef, resetRef, pausedRef, theme, orbitEnabled }: SceneProps) {
   const wallMesh  = useRef<THREE.InstancedMesh>(null);
   const floorMesh = useRef<THREE.InstancedMesh>(null);
   const orbitRef  = useRef<any>(null);
@@ -338,7 +337,7 @@ export function MazeProvider({ children }: { children: React.ReactNode }) {
 
 // ─── Canvas — render as absolute overlay, no fixed height ─────────────────────
 export function MazeCanvas() {
-  const { grid, animRef, resetRef, pausedRef, done, theme } = useMazeCtx();
+  const { grid, animRef, resetRef, pausedRef, theme } = useMazeCtx();
   const [orbitEnabled, setOrbitEnabled] = useState(false);
 
   // Screen-space proximity: enable orbit when cursor is in the right half
@@ -390,7 +389,6 @@ export function MazeCanvas() {
           animRef={animRef}
           resetRef={resetRef}
           pausedRef={pausedRef}
-          done={done}
           theme={theme}
           orbitEnabled={orbitEnabled}
         />

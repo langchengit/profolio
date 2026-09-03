@@ -111,7 +111,7 @@ export function Hero() {
               <a href="#projects" className="btn-cta">
                 View my work
               </a>
-              <a href="#contact" className="btn-cta">
+              <a href="#contact" className="btn-cta btn-cta-reverse">
                 Get in touch
               </a>
             </div>
