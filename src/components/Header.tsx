@@ -32,7 +32,7 @@ export function Header() {
               aria-label="Home"
               className="flex items-center gap-3"
             >
-              <span className="h-5 w-5 rounded-full bg-accent shadow-[0_0_18px_-2px_var(--accent)]" />
+              <span className="h-5 w-5 rounded-full bg-accent" />
             </a>
           </div>
 
