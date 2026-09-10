@@ -108,8 +108,8 @@ export function Hero() {
               className="intro mt-9 flex flex-wrap items-center gap-3"
               style={{ animationDelay: '0.36s' }}
             >
-              <a href="#projects" className="btn-cta">
-                View my work
+              <a href="https://resume.minglanging.com/" className="btn-cta">
+                View my resume
               </a>
               <a href="#contact" className="btn-cta btn-cta-reverse">
                 Get in touch
