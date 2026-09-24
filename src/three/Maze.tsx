@@ -2,7 +2,9 @@ import { useRef, useMemo, useEffect, useState, createContext, useContext } from 
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
+import { Pause, Play, Shuffle } from 'lucide-react';
 import { generateMaze, ROWS, COLS, START, END, type Grid } from './maze/generate';
+import { useMediaQuery } from '../lib/hooks';
 import { runDFS, runBFS, runGreedy, buildResets, type Update, type CellState } from './maze/algorithms';
 import { useTheme, type Theme } from '../lib/theme';
 
@@ -43,6 +45,16 @@ function getNeon(theme: Theme): Neon {
 
 const MS_PER_STEP = 85;
 
+/** `side`: full-hero canvas with the maze drawn in its right half (landscape
+ *  screens). `stacked`: a canvas of its own below the hero text (portrait
+ *  tablets), so the camera sits closer and the maze is centred. */
+export type MazeLayout = 'side' | 'stacked';
+
+const CAMERA = {
+  side:    { distance: 42, min: 32, max: 65 },
+  stacked: { distance: 24, min: 18, max: 40 },
+} as const;
+
 const wallGeo  = new THREE.BoxGeometry(TILE_W, WALL_H,  TILE_W);
 const floorGeo = new THREE.BoxGeometry(TILE_W, FLOOR_H, TILE_W);
 
@@ -54,9 +66,14 @@ interface SceneProps {
   pausedRef:    React.RefObject<boolean>;
   theme:        Theme;
   orbitEnabled: boolean;
+  zoomEnabled:  boolean;
+  /** False on touch-first devices: no OrbitControls at all, because they set
+   *  `touch-action: none` on the canvas and a swipe could no longer scroll. */
+  canOrbit:     boolean;
+  layout:       MazeLayout;
 }
 
-function MazeScene({ grid, animRef, resetRef, pausedRef, theme, orbitEnabled }: SceneProps) {
+function MazeScene({ grid, animRef, resetRef, pausedRef, theme, orbitEnabled, zoomEnabled, canOrbit, layout }: SceneProps) {
   const wallMesh  = useRef<THREE.InstancedMesh>(null);
   const floorMesh = useRef<THREE.InstancedMesh>(null);
   const orbitRef  = useRef<any>(null);
@@ -188,28 +205,34 @@ function MazeScene({ grid, animRef, resetRef, pausedRef, theme, orbitEnabled }: 
   const { camera, size } = useThree();
   useEffect(() => {
     if (!(camera instanceof THREE.PerspectiveCamera)) return;
+    if (layout === 'stacked') return;
     // Shift frustum left by 25% of canvas width — places world-origin at 75% from left.
     // fullWidth = width keeps the zoom unchanged; only the frustum centre moves.
-    camera.setViewOffset(size.width, size.height, -size.width * 0.25, 0, size.width, size.height);
+    // The small upward shift keeps the maze clear of the controls pinned to the
+    // bottom of the hero on shorter landscape screens (e.g. 1024x768 tablets).
+    camera.setViewOffset(size.width, size.height, -size.width * 0.25, size.height * 0.06, size.width, size.height);
     return () => { (camera as THREE.PerspectiveCamera).clearViewOffset(); };
-  }, [camera, size.width, size.height]);
+  }, [camera, size.width, size.height, layout]);
+
+  const cam = CAMERA[layout];
 
   return (
     <>
-      <PerspectiveCamera makeDefault position={[0, 42, 0.1]} fov={70} />
-      <OrbitControls
+      <PerspectiveCamera makeDefault position={[0, cam.distance, 0.1]} fov={70} />
+      {canOrbit && <OrbitControls
         ref={orbitRef}
         enabled={orbitEnabled}
         enablePan={false}
-        minDistance={32}
-        maxDistance={65}
+        enableZoom={zoomEnabled}
+        minDistance={cam.min}
+        maxDistance={cam.max}
         minPolarAngle={0.15}
         maxPolarAngle={Math.PI / 2.1}
         autoRotate={false}
         dampingFactor={0.07}
         enableDamping
         target={[0, 0, 0]}
-      />
+      />}
 
       <group>
         <ambientLight intensity={light ? 1.4 : 0.2} />
@@ -243,6 +266,8 @@ interface AlgoStats { explored: number; pathLen: number }
 
 interface MazeCtx {
   grid:        Grid;
+  /** Bumped on every regenerate — keys the scene so it rebuilds from scratch. */
+  gridId:      number;
   animRef:     React.RefObject<{ updates: Update[]; idx: number }>;
   resetRef:    React.RefObject<Update[] | null>;
   pausedRef:   React.RefObject<boolean>;
@@ -253,6 +278,7 @@ interface MazeCtx {
   theme:       Theme;
   run:         (algo: Algo) => void;
   togglePause: () => void;
+  regenerate:  () => void;
 }
 
 const MazeCtx = createContext<MazeCtx | null>(null);
@@ -282,7 +308,8 @@ const LEGEND: [string, string][] = [
 // ─── Provider — owns all maze state ───────────────────────────────────────────
 export function MazeProvider({ children }: { children: React.ReactNode }) {
   const theme     = useTheme(s => s.theme);
-  const grid      = useMemo(() => generateMaze(), []);
+  const [maze, setMaze] = useState(() => ({ grid: generateMaze(), id: 0 }));
+  const grid      = maze.grid;
   const animRef   = useRef<{ updates: Update[]; idx: number }>({ updates: [], idx: 0 });
   const resetRef  = useRef<Update[] | null>(null);
   const pausedRef = useRef(false);
@@ -322,6 +349,17 @@ export function MazeProvider({ children }: { children: React.ReactNode }) {
     setDone(false);
   }
 
+  function regenerate() {
+    animRef.current  = { updates: [], idx: 0 };
+    resetRef.current = null;
+    pausedRef.current = false;
+    setPaused(false);
+    setActive(null);
+    setDone(false);
+    setStats(null);
+    setMaze((m) => ({ grid: generateMaze(), id: m.id + 1 }));
+  }
+
   function togglePause() {
     const next = !pausedRef.current;
     pausedRef.current = next;
@@ -329,16 +367,20 @@ export function MazeProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <MazeCtx.Provider value={{ grid, animRef, resetRef, pausedRef, done, active, paused, stats, theme, run, togglePause }}>
+    <MazeCtx.Provider value={{ grid, gridId: maze.id, animRef, resetRef, pausedRef, done, active, paused, stats, theme, run, togglePause, regenerate }}>
       {children}
     </MazeCtx.Provider>
   );
 }
 
 // ─── Canvas — render as absolute overlay, no fixed height ─────────────────────
-export function MazeCanvas() {
-  const { grid, animRef, resetRef, pausedRef, theme } = useMazeCtx();
+export function MazeCanvas({ layout = 'side' }: { layout?: MazeLayout }) {
+  const { grid, gridId, animRef, resetRef, pausedRef, theme } = useMazeCtx();
+  const canOrbit = useCanOrbit();
   const [orbitEnabled, setOrbitEnabled] = useState(false);
+  // Wheel-zoom only after the visitor clicks into the maze, so scrolling the
+  // page past the hero never gets swallowed by the camera.
+  const [zoomArmed, setZoomArmed] = useState(false);
 
   // Screen-space proximity: enable orbit when cursor is in the right half
   // (where the maze lives). A window-level pointerdown/up pair locks orbit on
@@ -349,7 +391,7 @@ export function MazeCanvas() {
 
   useEffect(() => {
     const onDown = () => {
-      if (inZoneRef.current) { isDraggingRef.current = true; setOrbitEnabled(true); }
+      if (inZoneRef.current) { isDraggingRef.current = true; setOrbitEnabled(true); setZoomArmed(true); }
     };
     const onUp = () => {
       isDraggingRef.current = false;
@@ -370,12 +412,16 @@ export function MazeCanvas() {
         const rect = e.currentTarget.getBoundingClientRect();
         const mx = (e.clientX - rect.left) / rect.width;
         const my = (e.clientY - rect.top)  / rect.height;
-        const inZone = mx >= 0.56 && mx <= 0.88 && my <= 0.78;
+        // Side layout: only the right-half area where the maze is drawn.
+        // Stacked: the canvas is the maze's own box, so all of it counts.
+        const inZone = layout === 'stacked' || (mx >= 0.56 && mx <= 0.88 && my <= 0.78);
         inZoneRef.current = inZone;
         if (!isDraggingRef.current) setOrbitEnabled(inZone);
+        if (!inZone) setZoomArmed(false);
       }}
       onMouseLeave={() => {
         inZoneRef.current = false;
+        setZoomArmed(false);
         if (!isDraggingRef.current) setOrbitEnabled(false);
       }}
     >
@@ -385,12 +431,16 @@ export function MazeCanvas() {
         gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
       >
         <MazeScene
+          key={gridId}
           grid={grid}
           animRef={animRef}
           resetRef={resetRef}
           pausedRef={pausedRef}
           theme={theme}
           orbitEnabled={orbitEnabled}
+          zoomEnabled={zoomArmed}
+          canOrbit={canOrbit}
+          layout={layout}
         />
       </Canvas>
     </div>
@@ -398,13 +448,19 @@ export function MazeCanvas() {
 }
 
 // ─── Controls — status bar, algo buttons, legend ───────────────────────────────
-export function MazeControls() {
-  const { active, done, paused, stats, run, togglePause } = useMazeCtx();
+/** Mouse/trackpad devices get drag-to-rotate; touch-first ones don't. */
+function useCanOrbit() {
+  return useMediaQuery('(hover: hover) and (pointer: fine)');
+}
+
+export function MazeControls({ inset = true }: { inset?: boolean }) {
+  const { active, done, paused, stats, run, togglePause, regenerate } = useMazeCtx();
+  const canOrbit = useCanOrbit();
   const [hovered, setHovered] = useState<Algo | null>(null);
   const activeInfo = ALGOS.find(a => a.id === active);
 
   return (
-    <div className="pointer-events-none flex flex-col gap-3 px-8 pb-2">
+    <div className={`pointer-events-none flex flex-col gap-3 pb-2 ${inset ? 'px-8' : ''}`}>
 
       {/* Status + pause */}
       <div className="pointer-events-auto flex items-center justify-center gap-3 h-5">
@@ -419,10 +475,12 @@ export function MazeControls() {
         )}
         {active && !done && (
           <button
+            type="button"
             onClick={togglePause}
-            className="font-mono text-[11px] text-foreground/35 transition hover:text-foreground/70"
+            className="inline-flex items-center gap-1 py-1 font-mono text-xs text-faint transition hover:text-text"
           >
-            {paused ? '▶ resume' : '⏸ pause'}
+            {paused ? <Play size={12} aria-hidden="true" /> : <Pause size={12} aria-hidden="true" />}
+            {paused ? 'resume' : 'pause'}
           </button>
         )}
       </div>
@@ -436,6 +494,7 @@ export function MazeControls() {
           return (
             <button
               key={id}
+              type="button"
               onClick={() => run(id)}
               onMouseEnter={() => setHovered(id)}
               onMouseLeave={() => setHovered(null)}
@@ -457,6 +516,16 @@ export function MazeControls() {
             </button>
           );
         })}
+        <button
+          type="button"
+          onClick={regenerate}
+          aria-label="Generate a new maze"
+          title="New maze"
+          className="flex flex-col items-center justify-center border border-border bg-surface px-3 py-2.5 text-xs text-muted transition hover:border-accent hover:text-accent"
+        >
+          <Shuffle size={16} aria-hidden="true" />
+          <span className="mt-1 font-sans opacity-60">New maze</span>
+        </button>
       </div>
 
       {/* Legend */}
@@ -464,15 +533,17 @@ export function MazeControls() {
         {LEGEND.map(([color, label]) => (
           <div key={label} className="flex items-center gap-1.5">
             <span className="h-2 w-2 shrink-0 rounded-sm" style={{ background: color }} />
-            <span className="font-mono text-[10px] text-foreground/45">{label}</span>
+            <span className="font-mono text-xs text-muted">{label}</span>
           </div>
         ))}
       </div>
 
-      {/* Drag hint */}
-      <div className="flex items-center justify-center">
-        <span className="font-mono text-[10px] text-foreground/25">drag to rotate · scroll to zoom</span>
-      </div>
+      {/* Drag hint — only where dragging actually works. */}
+      {canOrbit && (
+        <div className="flex items-center justify-center">
+          <span className="font-mono text-xs text-faint">drag to rotate · click, then scroll to zoom</span>
+        </div>
+      )}
 
     </div>
   );

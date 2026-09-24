@@ -11,7 +11,7 @@ export function Footer() {
         </p>
         <a
           href="#home"
-          className="inline-flex items-center gap-2 text-sm text-muted transition hover:text-accent"
+          className="inline-flex items-center gap-2 py-2 text-sm text-muted transition hover:text-accent"
         >
           Back to top <ArrowUp size={15} />
         </a>

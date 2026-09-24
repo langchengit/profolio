@@ -97,8 +97,34 @@ function rotateHue(hex: string, deg: number): string {
 export function normalizeForTheme(hex: string, theme: Theme): string {
   const [h, s, l] = hexToHsl(hex);
   const s2 = clamp(s, 60, 96);
-  const l2 = theme === 'dark' ? clamp(l, 62, 76) : clamp(l, 40, 52);
-  return hslToHex(h, s2, l2);
+  let l2 = theme === 'dark' ? clamp(l, 62, 76) : clamp(l, 40, 52);
+  // The band alone isn't enough for bright hues (amber at 50% lightness is
+  // ~2:1 on the ivory page), so keep stepping away from the page background
+  // until the accent clears 4.5:1 as small text.
+  const bg = PAGE_BG[theme];
+  const step = theme === 'dark' ? 1 : -1;
+  let out = hslToHex(h, s2, l2);
+  while (contrast(out, bg) < 4.5 && l2 > 5 && l2 < 95) {
+    l2 += step;
+    out = hslToHex(h, s2, l2);
+  }
+  return out;
+}
+
+/** Page background per theme — mirrors --bg in index.css. */
+const PAGE_BG: Record<Theme, string> = { light: '#f0eee6', dark: '#0c0b16' };
+
+function luminance(hex: string): number {
+  const [r, g, b] = hexToRgb(hex).map((v) => {
+    const c = v / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrast(a: string, b: string): number {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
 }
 
 /** Build a pleasing multi-hue triad from a single custom color. */

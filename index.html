@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo for lang.jpg" />
+    <link rel="icon" type="image/jpeg" href="/logo.jpg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
@@ -71,11 +71,29 @@
           var m = l - c / 2;
           return r2h((r + m) * 255, (g + m) * 255, (b + m) * 255);
         }
+        function lum(hex) {
+          var c = h2r(hex).map(function (v) {
+            v /= 255;
+            return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+          });
+          return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+        }
+        function contrast(a, b) {
+          var x = lum(a), y = lum(b);
+          return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+        }
         function norm(hex, theme) {
           var a = h2hsl(hex);
           var s = clamp(a[1], 60, 96);
           var l = theme === 'dark' ? clamp(a[2], 62, 76) : clamp(a[2], 40, 52);
-          return hsl2h(a[0], s, l);
+          var bg = theme === 'dark' ? '#0c0b16' : '#f0eee6';
+          var step = theme === 'dark' ? 1 : -1;
+          var out = hsl2h(a[0], s, l);
+          while (contrast(out, bg) < 4.5 && l > 5 && l < 95) {
+            l += step;
+            out = hsl2h(a[0], s, l);
+          }
+          return out;
         }
         try {
           var raw = localStorage.getItem('accent');

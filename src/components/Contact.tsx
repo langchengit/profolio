@@ -1,14 +1,43 @@
-import { ArrowUpRight } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { ArrowUpRight, Check, Copy } from 'lucide-react';
 import { contact } from '../data/resume';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import { Section } from './Section';
 import { MetaRow, Panel, PanelRow, TitleRow } from './Panel';
 
-const LINK = 'inline-flex items-center gap-1.5 transition hover:text-accent';
+const LINK = 'inline-flex items-center gap-1.5 py-1.5 transition hover:text-accent';
+
+/** Copies the email to the clipboard and flips to a "Copied" state for a moment. */
+function CopyEmail({ email }: { email: string }) {
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (!copied) return;
+    const id = setTimeout(() => setCopied(false), 2000);
+    return () => clearTimeout(id);
+  }, [copied]);
+
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        navigator.clipboard?.writeText(email).then(
+          () => setCopied(true),
+          () => {},
+        );
+      }}
+      className="btn-cta"
+    >
+      {copied ? <Check size={14} aria-hidden="true" /> : <Copy size={14} aria-hidden="true" />}
+      {/* Announced politely so screen-reader users hear the result too. */}
+      <span aria-live="polite">{copied ? 'Copied' : 'Copy email'}</span>
+    </button>
+  );
+}
 
 export function Contact() {
   return (
-    <Section id="contact" index="06" kicker="" title="Contact">
+    <Section id="contact" index="06" title="Contact">
       <Panel>
         <PanelRow index={0}>
           <MetaRow left="Email" right={contact.location} />
@@ -40,6 +69,12 @@ export function Contact() {
             I'm always open to new opportunities, collaborations, and good
             conversations.
           </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a href={`mailto:${contact.email}`} className="btn-cta btn-cta-reverse">
+              Send an email
+            </a>
+            <CopyEmail email={contact.email} />
+          </div>
         </PanelRow>
       </Panel>
     </Section>

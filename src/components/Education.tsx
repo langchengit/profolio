@@ -4,7 +4,7 @@ import { MetaRow, Panel, PanelRow, Tag, TagRow, TitleRow } from './Panel';
 
 export function Education() {
   return (
-    <Section id="education" index="02" kicker="" title="Education">
+    <Section id="education" index="02" title="Education">
       {/* Date-ordered like Experience, so the rows share the same timeline rail. */}
       <Panel>
         {education.map((e, i) => (

@@ -7,7 +7,7 @@ import { Reveal } from './Reveal';
  *  cells, and square tags. Every section is assembled from these so the
  *  sections stay in step with each other. */
 
-const META = 'font-mono text-[0.7rem] uppercase tracking-[0.18em]';
+const META = 'font-mono text-xs uppercase tracking-[0.18em]';
 
 /** Outer frame. Rows inside separate themselves with their own top border. */
 export function Panel({ children }: { children: ReactNode }) {
@@ -104,7 +104,7 @@ export function NumberedGrid({ items }: { items: ReactNode[] }) {
 
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 border border-border px-3 py-1.5 font-mono text-[0.7rem] uppercase tracking-[0.12em] text-muted">
+    <span className="inline-flex items-center gap-1.5 border border-border px-3 py-1.5 font-mono text-xs uppercase tracking-[0.12em] text-muted">
       {children}
     </span>
   );

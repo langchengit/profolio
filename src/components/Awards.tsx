@@ -5,16 +5,14 @@ import { Reveal } from './Reveal';
 
 export function Awards() {
   return (
-    <Section id="awards" index="05" kicker="" title="Awards">
+    <Section id="awards" index="05" title="Awards">
       {/* Categories aren't a sequence, so they sit side by side as their own
-          columns instead of stacking as timeline rows. */}
-      <div className="grid gap-8 sm:grid-cols-3">
+          columns — but only from `lg`, since three columns at tablet width
+          squeeze each list to a few words per line. */}
+      <div className="grid items-start gap-10 lg:grid-cols-3 lg:gap-8">
         {awards.map((cat, i) => (
           <Reveal key={cat.id} delay={i * 60}>
-            <MetaRow
-              left={cat.label}
-              right={`${cat.items.length} ${cat.items.length === 1 ? 'award' : 'awards'}`}
-            />
+            <MetaRow left={cat.label} />
             <div className="mt-5">
               <NumberedList items={cat.items} />
             </div>

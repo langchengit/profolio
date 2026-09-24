@@ -4,7 +4,8 @@ import { Reveal } from './Reveal';
 interface SectionProps {
   id: string;
   index: string;
-  kicker: string;
+  /** Optional label after the index; the rule between them only shows with it. */
+  kicker?: string;
   title: string;
   children: ReactNode;
   className?: string;
@@ -20,8 +21,12 @@ export function Section({ id, index, kicker, title, children, className = '' }: 
       <Reveal className="mb-12 md:mb-16">
         <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.3em] text-accent">
           <span>{index}</span>
-          <span className="h-px w-10 bg-accent/50" />
-          <span>{kicker}</span>
+          {kicker && (
+            <>
+              <span className="h-px w-10 bg-accent/50" />
+              <span>{kicker}</span>
+            </>
+          )}
         </div>
         <h2 className="mt-4 font-display text-4xl font-bold tracking-tight md:text-5xl">
           {title}

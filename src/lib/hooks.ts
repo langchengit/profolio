@@ -101,3 +101,26 @@ export function useTypewriter(text: string, speed = 85) {
 
   return { typed: text.slice(0, count), done: count >= text.length };
 }
+
+/** Live `matchMedia` result, for rendering heavy pieces (like the WebGL maze)
+ *  only where they're actually shown instead of just hiding them with CSS. */
+export function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(query).matches,
+  );
+
+  useEffect(() => {
+    const mql = window.matchMedia(query);
+    const onChange = () => setMatches(mql.matches);
+    onChange();
+    mql.addEventListener('change', onChange);
+    // Some embedded/emulated viewports resize without firing `change`.
+    window.addEventListener('resize', onChange, { passive: true });
+    return () => {
+      mql.removeEventListener('change', onChange);
+      window.removeEventListener('resize', onChange);
+    };
+  }, [query]);
+
+  return matches;
+}

@@ -42,7 +42,7 @@ export function PalettePicker() {
         aria-label="Change accent color"
         aria-expanded={open}
         aria-controls={panelId}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surface text-text backdrop-blur transition hover:border-accent hover:text-accent"
+        className="inline-flex h-10 w-10 items-center justify-center border border-border bg-surface text-text backdrop-blur transition hover:border-accent hover:text-accent"
       >
         <Palette size={18} />
       </button>
@@ -52,7 +52,7 @@ export function PalettePicker() {
           id={panelId}
           role="dialog"
           aria-label="Accent color"
-          className="absolute left-0 top-12 z-50 w-64 rounded-2xl border border-border bg-surface-strong p-4 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl"
+          className="absolute left-0 top-12 z-50 w-64 border border-border bg-surface-strong p-4 shadow-[0_20px_60px_-24px_rgba(0,0,0,0.6)] backdrop-blur-xl"
         >
           <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted">
             Accent color
@@ -84,10 +84,10 @@ export function PalettePicker() {
             })}
           </div>
 
-          <label className="mt-4 flex cursor-pointer items-center justify-between gap-3 border border-border px-3 py-2.5 transition hover:border-border-strong">
+          <label className="mt-4 flex cursor-pointer items-center justify-between gap-3 border border-border px-3 py-2.5 transition hover:border-border-strong has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent">
             <span className="flex items-center gap-2 text-sm text-text">
               <span
-                className="h-5 w-5 rounded-full border border-border-strong"
+                className="h-5 w-5 border border-border-strong"
                 style={{ background: normalizeForTheme(customValue, theme) }}
               />
               Custom

@@ -42,11 +42,14 @@
   --border: rgba(46, 38, 20, 0.12);
   --border-strong: rgba(46, 38, 20, 0.22);
   --text: #1c1a15;
-  --muted: #665f4e;
-  --faint: #9a9484;
-  --accent: #ec1d1d;
-  --accent-2: #f59e0b;
-  --accent-3: #e82183;
+  /* muted/faint both clear 4.5:1 on --bg so small meta text stays readable. */
+  --muted: #575040;
+  --faint: #6f6958;
+  /* Default (Ember) triad as normalizeForTheme() in lib/accent.ts outputs it,
+     so there's no color jump before the accent store applies. */
+  --accent: #945f06;
+  --accent-2: #d81212;
+  --accent-3: #d40c2e;
 }
 
 [data-theme='dark'] {
@@ -60,10 +63,10 @@
   --border-strong: rgba(255, 255, 255, 0.17);
   --text: #ecebf7;
   --muted: #a8a5c0;
-  --faint: #6d6a86;
-  --accent: #f04c4c;
-  --accent-2: #f7b545;
-  --accent-3: #ed4f9d;
+  --faint: #85829e;
+  --accent: #f7b545;
+  --accent-2: #f04c4c;
+  --accent-3: #f44865;
 }
 
 * {
@@ -102,7 +105,13 @@ body {
 
 ::selection {
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
+}
+
+/* One keyboard focus ring for every control; mouse clicks don't trigger it. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 ::-webkit-scrollbar {
@@ -168,7 +177,7 @@ body {
     border: 1px solid var(--accent);
     padding: 0.85rem 1.4rem;
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     line-height: 1;
     text-transform: uppercase;
     letter-spacing: 0.18em;
@@ -194,23 +203,6 @@ body {
   }
 }
 
-.card {
-  border: 1px solid var(--border);
-  /* Tied to the page background so the 3D scene is dimmed (its color does not
-     bleed through) behind text, while staying subtly translucent. */
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  border-radius: 1rem;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  transition:
-    border-color 0.25s ease,
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-.card:hover {
-  border-color: var(--border-strong);
-  box-shadow: 0 18px 50px -28px rgba(0, 0, 0, 0.55);
-}
 
 /* Subtle per-glyph halo so hero text stays legible over the orb (no ellipse). */
 .hero-legible {
@@ -225,18 +217,6 @@ body {
   text-shadow: none;
 }
 
-.chip {
-  display: inline-flex;
-  align-items: center;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  padding: 0.3rem 0.7rem;
-  font-size: 0.78rem;
-  font-family: var(--font-mono);
-  color: var(--muted);
-  font-weight: 400;
-}
 
 /* ---------- Above-the-fold intro animation ---------- */
 @keyframes intro-up {

@@ -40,13 +40,13 @@ const SKILL_ICONS: Record<string, ComponentType<{ size?: number }>> = {
 
 export function Skills() {
   return (
-    <Section id="skills" index="04" kicker="" title="Skills">
+    <Section id="skills" index="04" title="Skills">
       {/* Categories aren't a sequence, so no connecting line — the category
           label takes the meta slot and the items are the tag row. */}
       <Panel>
         {skills.map((cat, i) => (
           <PanelRow key={cat.id} index={i}>
-            <MetaRow left={cat.label} right={`${cat.items.length} items`} />
+            <MetaRow left={cat.label} />
             <TagRow className="mt-5">
               {cat.items.map((it) => {
                 const Icon = SKILL_ICONS[it];

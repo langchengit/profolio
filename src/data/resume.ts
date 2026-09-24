@@ -15,10 +15,10 @@ export const personal: PersonalInfo = {
   greeting: 'Hi, my name is',
   name: 'Minglang Chen',
   tagline:
-    'Software Engineering Student @ UWaterloo — Refresh to get a different maze :)',
+    'Software Engineering Student @ UWaterloo — Pick an algorithm to watch it solve the maze, or shuffle a new one :)',
   location: 'Waterloo | Vancouver | Shanghai',
   photoUrl: '',
-  availability: 'Looking for Summer 2027 internships ',
+  availability: 'Looking for Summer 2027 internships',
 };
 
 export const education: EducationEntry[] = [
@@ -26,7 +26,7 @@ export const education: EducationEntry[] = [
     id: 'uwaterloo',
     school: 'University of Waterloo',
     credential: 'Bachelor of Applied Science in Software Engineering | Co-op',
-    detail: 'Earned President\'s Scholorship of Distinction',
+    detail: 'Earned President\'s Scholarship of Distinction',
     location: 'Waterloo, ON',
     start: 'Sep 2026',
     end: 'Apr 2031',
@@ -36,7 +36,7 @@ export const education: EducationEntry[] = [
     school: 'University of British Columbia',
     credential: 'Access Studies in Mathematics',
     detail: 'A+ in MATH 200: Multivariable Calculus',
-    location: 'Waterloo, ON',
+    location: 'Vancouver, BC',
     start: 'Sep 2025',
     end: 'Dec 2025',
   },
@@ -58,7 +58,7 @@ export const experience: ExperienceEntry[] = [
     role: 'Vice Chair',
     tags: ['Outreach', 'Web Management', 'GitHub', 'Event Operations'],
     location: 'Vancouver, BC',
-    start: 'Sept 2024',
+    start: 'Sep 2024',
     end: 'Present',
     bullets: [
       'Organizer of vsHacks 2025 and 2026',
@@ -80,7 +80,7 @@ export const experience: ExperienceEntry[] = [
     role: 'Math Mentor',
     tags: ['Mathematics', 'Tutoring', 'Communication', 'Lesson Planning'],
     location: 'Remote',
-    start: 'October 2025',
+    start: 'Oct 2025',
     end: 'May 2026',
     bullets: [
       'Taught one-on-one math lessons to an elementary student twice weekly, preparing lesson plans and joining post-lesson mentor discussions to refine my teaching',
@@ -94,8 +94,8 @@ export const experience: ExperienceEntry[] = [
     role: 'Co-Leader',
     tags: ['Physics', 'Engineering', 'Teaching', 'Competition Prep'],
     location: 'Vancouver, BC',
-    start: 'Sept 2025',
-    end: 'June 2026',
+    start: 'Sep 2025',
+    end: 'Jun 2026',
     bullets: [
       'Conducted weekly meetings and delivered lectures',
       'Researched physics topics such as NFC and took apart consumer electronics, including a Google Pixel phone and a projector, to prepare hands-on lectures for club members',
