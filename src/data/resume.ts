@@ -197,9 +197,9 @@ export const awards: AwardCategory[] = [
     items: [
       'Euclid Contest — Top 25% (2024, 2025)',
       'AIME Participant',
-      'CSMC Honor Roll (2023, 2025)',
-      'Cayley Contest Honor Roll (2023)',
-      'Fermat Contest Honor Roll (2024)',
+      'CSMC Honor Roll (Group IV 2023, Group V 2025)',
+      'Cayley Contest Honor Roll (Group V 2023)',
+      'Fermat Contest Honor Roll (Group V 2024)',
       'Stanford Math Tournament — Team Top 40%',
     ],
   },
