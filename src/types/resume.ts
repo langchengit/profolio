@@ -23,6 +23,8 @@ export interface ExperienceEntry {
   id: string;
   organization: string;
   role: string;
+  /** Live website for the organization; when set, its name becomes a link. */
+  url?: string;
   tags: string[];
   location: string;
   start: string;

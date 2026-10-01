@@ -1,6 +1,6 @@
 import { experience } from '../data/resume';
 import { Section } from './Section';
-import { BulletBody, MetaRow, Panel, PanelRow, Tag, TagRow, TitleRow } from './Panel';
+import { BulletBody, MetaRow, Panel, PanelRow, Tag, TagRow, TitleLink, TitleRow } from './Panel';
 
 export function Experience() {
   return (
@@ -11,7 +11,10 @@ export function Experience() {
         {experience.map((e, i) => (
           <PanelRow key={e.id} index={i} line>
             <MetaRow left={`${e.start} — ${e.end}`} right={e.location} />
-            <TitleRow title={e.role} aside={e.organization} />
+            <TitleRow
+              title={e.role}
+              aside={<TitleLink href={e.url}>{e.organization}</TitleLink>}
+            />
             <BulletBody bullets={e.bullets} />
             <TagRow>
               {e.tags.map((t) => (

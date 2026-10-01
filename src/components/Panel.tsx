@@ -64,6 +64,32 @@ export function MetaRow({ left, right }: { left: ReactNode; right?: ReactNode })
   );
 }
 
+/** Organization / project name, in the accent colour unless `plain`. With an
+ *  href it links out to the live site, marked only by its underline. */
+export function TitleLink({
+  href,
+  plain = false,
+  children,
+}: {
+  href?: string;
+  plain?: boolean;
+  children: ReactNode;
+}) {
+  const color = plain ? '' : 'text-accent';
+  if (!href) return <span className={color}>{children}</span>;
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className={`cursor-pointer ${color} underline decoration-current decoration-1 underline-offset-[0.2em]`}
+    >
+      {children}
+      <span className="sr-only"> (opens in a new tab)</span>
+    </a>
+  );
+}
+
 export function TitleRow({ title, aside }: { title: ReactNode; aside?: ReactNode }) {
   return (
     <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-10">

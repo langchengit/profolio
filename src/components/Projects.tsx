@@ -4,7 +4,7 @@ import { projects } from '../data/resume';
 import { getSkillIcon } from '../lib/skillIcons';
 import { Section } from './Section';
 import { Reveal } from './Reveal';
-import { BulletBody, MetaRow, Tag, TagRow, TitleRow } from './Panel';
+import { BulletBody, MetaRow, Tag, TagRow, TitleLink, TitleRow } from './Panel';
 
 const LINK = 'inline-flex items-center gap-1.5 py-1.5 transition hover:text-accent';
 
@@ -18,7 +18,7 @@ export function Projects() {
             <div className="h-full p-6 sm:p-8">
               <MetaRow left={p.affiliation} right={p.location} />
               <TitleRow
-                title={p.name}
+                title={<TitleLink href={p.liveUrl || undefined} plain>{p.name}</TitleLink>}
                 aside={
                   <div className="flex flex-wrap gap-x-4 gap-y-1 sm:justify-end">
                     {p.githubUrl && (
