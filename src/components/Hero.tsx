@@ -107,7 +107,7 @@ export function Hero() {
             </h1>
 
             <p
-              className="intro mt-5 text-lg font-medium sm:text-xl"
+              className="intro mt-5 font-serif text-lg font-medium sm:text-xl"
               style={{ animationDelay: '0.2s' }}
             >
               <span className="text-gradient">{headline}</span>
