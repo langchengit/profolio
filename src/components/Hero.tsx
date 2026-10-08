@@ -71,7 +71,7 @@ export function Hero() {
               </div>
 
               <div
-                className="intro inline-flex items-center gap-2 border border-border bg-surface px-3.5 py-1.5 font-mono text-xs uppercase tracking-[0.2em] text-muted backdrop-blur"
+                className="intro inline-flex items-center gap-2 border border-border bg-surface px-3.5 py-1.5 font-serif text-xs uppercase tracking-[0.2em] text-muted backdrop-blur"
                 style={{ animationDelay: '0.05s' }}
               >
                 <MapPin size={13} className="text-accent" /> {personal.location}
@@ -79,7 +79,7 @@ export function Hero() {
             </div>
 
             <p
-              className="intro font-mono text-sm uppercase tracking-[0.2em] text-muted sm:text-base"
+              className="intro font-serif text-sm uppercase tracking-[0.2em] text-muted sm:text-base"
               style={{ animationDelay: '0.12s' }}
               aria-hidden="true"
             >
@@ -90,7 +90,7 @@ export function Hero() {
             {/* An invisible copy of the full name reserves the line box, so the
                 rest of the hero doesn't jump as the name types in. */}
             <h1
-              className="intro relative mt-2 font-display font-bold leading-[1.05] tracking-tight"
+              className="intro relative mt-2 font-serif font-bold leading-[1.05] tracking-tight"
               style={{
                 animationDelay: '0.12s',
                 fontSize: 'clamp(3rem, 3.5vw + 2rem, 6rem)',

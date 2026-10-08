@@ -5,7 +5,7 @@ import { useScrollSpy, useScrolled } from '../lib/hooks';
 import { ThemeToggle } from './ThemeToggle';
 import { PalettePicker } from './PalettePicker';
 
-const LINK = 'font-mono text-xs uppercase tracking-[0.18em] transition';
+const LINK = 'font-serif text-xs uppercase tracking-[0.18em] transition';
 
 /** The logo links home and the CTA links to contact, so those two drop out of
  *  the link row (the mobile menu still lists everything). */

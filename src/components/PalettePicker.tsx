@@ -95,7 +95,7 @@ export function PalettePicker() {
                 <Check size={14} className="text-accent" strokeWidth={3} />
               )}
             </span>
-            <span className="font-mono text-xs uppercase text-muted">
+            <span className="font-serif text-xs uppercase text-muted">
               {customValue}
             </span>
             <input

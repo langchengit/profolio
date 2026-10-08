@@ -7,7 +7,7 @@ import { Reveal } from './Reveal';
  *  cells, and square tags. Every section is assembled from these so the
  *  sections stay in step with each other. */
 
-const META = 'font-mono text-xs uppercase tracking-[0.18em]';
+const META = 'font-serif text-xs uppercase tracking-[0.18em]';
 
 /** Outer frame. Rows inside separate themselves with their own top border. */
 export function Panel({ children }: { children: ReactNode }) {
@@ -93,7 +93,7 @@ export function TitleLink({
 export function TitleRow({ title, aside }: { title: ReactNode; aside?: ReactNode }) {
   return (
     <div className="mt-5 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
-      <h3 className="font-display text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
+      <h3 className="font-serif text-2xl font-bold leading-tight tracking-tight sm:text-3xl">
         {title}
       </h3>
       {aside && (
@@ -118,7 +118,7 @@ export function NumberedGrid({ items }: { items: ReactNode[] }) {
     <div className={`grid border-l border-t border-border ${gridCols(items.length)}`}>
       {items.map((item, i) => (
         <div key={i} className="border-b border-r border-border p-5">
-          <span className="font-mono text-xs text-accent">
+          <span className="font-serif text-xs text-accent">
             {String(i + 1).padStart(2, '0')}
           </span>
           <p className="mt-5 text-sm leading-relaxed text-muted sm:mt-7">{item}</p>
@@ -130,7 +130,7 @@ export function NumberedGrid({ items }: { items: ReactNode[] }) {
 
 export function Tag({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-1.5 border border-border px-3 py-1.5 font-mono text-xs uppercase tracking-[0.12em] text-muted">
+    <span className="inline-flex items-center gap-1.5 border border-border px-3 py-1.5 font-serif text-xs uppercase tracking-[0.12em] text-muted">
       {children}
     </span>
   );
@@ -203,7 +203,7 @@ export function NumberedList({ items }: { items: ReactNode[] }) {
           key={i}
           className={`flex gap-4 px-5 py-3.5 ${i > 0 ? 'border-t border-border' : ''}`}
         >
-          <span className="shrink-0 font-mono text-xs leading-relaxed text-accent">
+          <span className="shrink-0 font-serif text-xs leading-relaxed text-accent">
             {String(i + 1).padStart(2, '0')}
           </span>
           <p className="text-sm leading-relaxed text-muted">{item}</p>

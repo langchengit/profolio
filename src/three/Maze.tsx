@@ -465,7 +465,7 @@ export function MazeControls({ inset = true }: { inset?: boolean }) {
       {/* Status + pause */}
       <div className="pointer-events-auto flex items-center justify-center gap-3 h-5">
         {active && (
-          <span className="font-mono text-xs" style={{ color: activeInfo?.color }}>
+          <span className="font-serif text-xs" style={{ color: activeInfo?.color }}>
             {done
               ? `${activeInfo?.label} done — ${stats?.explored} cells · path ${stats?.pathLen} steps`
               : paused
@@ -477,7 +477,7 @@ export function MazeControls({ inset = true }: { inset?: boolean }) {
           <button
             type="button"
             onClick={togglePause}
-            className="inline-flex items-center gap-1 py-1 font-mono text-xs text-faint transition hover:text-text"
+            className="inline-flex items-center gap-1 py-1 font-serif text-xs text-faint transition hover:text-text"
           >
             {paused ? <Play size={12} aria-hidden="true" /> : <Pause size={12} aria-hidden="true" />}
             {paused ? 'resume' : 'pause'}
@@ -507,7 +507,7 @@ export function MazeControls({ inset = true }: { inset?: boolean }) {
                   : undefined
               }
             >
-              <span className="font-mono text-sm font-bold">{short}</span>
+              <span className="font-serif text-sm font-bold">{short}</span>
               <span className="mt-0.5 text-center font-sans opacity-60">
                 {label.replace(/ Search$/, '')}
                 <br />
@@ -533,7 +533,7 @@ export function MazeControls({ inset = true }: { inset?: boolean }) {
         {LEGEND.map(([color, label]) => (
           <div key={label} className="flex items-center gap-1.5">
             <span className="h-2 w-2 shrink-0 rounded-sm" style={{ background: color }} />
-            <span className="font-mono text-xs text-muted">{label}</span>
+            <span className="font-serif text-xs text-muted">{label}</span>
           </div>
         ))}
       </div>
@@ -541,7 +541,7 @@ export function MazeControls({ inset = true }: { inset?: boolean }) {
       {/* Drag hint — only where dragging actually works. */}
       {canOrbit && (
         <div className="flex items-center justify-center">
-          <span className="font-mono text-xs text-faint">drag to rotate · click, then scroll to zoom</span>
+          <span className="font-serif text-xs text-faint">drag to rotate · click, then scroll to zoom</span>
         </div>
       )}
 
