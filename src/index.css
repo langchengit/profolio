@@ -46,7 +46,7 @@
   --faint: #6f6958;
   /* Default (Ember) triad as normalizeForTheme() in lib/accent.ts outputs it,
      so there's no color jump before the accent store applies. */
-  --accent: #945f06;
+  --accent: #826903;
   --accent-2: #d81212;
   --accent-3: #d40c2e;
 }
@@ -55,7 +55,7 @@
   color-scheme: dark;
   /* Page and card sit on the same tone — panels are defined by their border,
      not by a fill that floats above the background. */
-  --bg: #0c0b16;
+  --bg: #050508;
   --surface: rgba(255, 255, 255, 0.045);
   --surface-strong: rgba(255, 255, 255, 0.08);
   --border: rgba(255, 255, 255, 0.09);
@@ -63,7 +63,7 @@
   --text: #ecebf7;
   --muted: #a8a5c0;
   --faint: #85829e;
-  --accent: #f7b545;
+  --accent: #f5c400;
   --accent-2: #f04c4c;
   --accent-3: #f44865;
 }

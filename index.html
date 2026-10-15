@@ -8,7 +8,7 @@
       name="description"
       content="Minglang Chen — Software Engineer. An interactive 3D portfolio of work in hardware, competitive programming, and team leadership."
     />
-    <meta name="theme-color" content="#0c0b16" />
+    <meta name="theme-color" content="#050508" />
     <meta property="og:title" content="Minglang Chen — Portfolio" />
     <meta
       property="og:description"
@@ -30,7 +30,7 @@
         // Keep the browser-chrome color in sync on first paint too (applyTheme()
         // in lib/theme.ts only runs on a toggle).
         var meta = document.querySelector('meta[name="theme-color"]');
-        if (meta) meta.setAttribute('content', t === 'dark' ? '#0c0b16' : '#f0eee6');
+        if (meta) meta.setAttribute('content', t === 'dark' ? '#050508' : '#f0eee6');
 
         // Mirror of normalizeForTheme() in src/lib/accent.ts — keep bands in sync.
         function clamp(n, lo, hi) { return Math.min(hi, Math.max(lo, n)); }
@@ -82,11 +82,13 @@
           var x = lum(a), y = lum(b);
           return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
         }
+        var DARK_EXACT = ['#f5c400'];
         function norm(hex, theme) {
+          if (theme === 'dark' && DARK_EXACT.indexOf(hex.toLowerCase()) !== -1) return hex;
           var a = h2hsl(hex);
           var s = clamp(a[1], 60, 96);
           var l = theme === 'dark' ? clamp(a[2], 62, 76) : clamp(a[2], 40, 52);
-          var bg = theme === 'dark' ? '#0c0b16' : '#f0eee6';
+          var bg = theme === 'dark' ? '#050508' : '#f0eee6';
           var step = theme === 'dark' ? 1 : -1;
           var out = hsl2h(a[0], s, l);
           while (contrast(out, bg) < 4.5 && l > 5 && l < 95) {

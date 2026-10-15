@@ -16,7 +16,7 @@ export interface Preset {
 /** Curated multi-hue triads. The first is the site default.
  *  Primaries span the hue wheel ~50°+ apart so solid swatches are all distinct. */
 export const PRESETS: Preset[] = [
-  { id: 'ember',   name: 'Ember',   triad: ['#f59e0b', '#ef4444', '#f43f5e'] }, // amber   ~45°
+  { id: 'ember',   name: 'Ember',   triad: ['#f5c400', '#ef4444', '#f43f5e'] }, // yellow  ~48°
   { id: 'forest',  name: 'Forest',  triad: ['#22c55e', '#10b981', '#84cc16'] }, // green  ~142°
   { id: 'ocean',   name: 'Ocean',   triad: ['#06b6d4', '#0ea5e9', '#22d3ee'] }, // cyan   ~186°
   { id: 'aurora',  name: 'Aurora',  triad: ['#6366f1', '#7c3aed', '#8b5cf6'] }, // indigo ~239°
@@ -91,10 +91,15 @@ function rotateHue(hex: string, deg: number): string {
   return hslToHex(h + deg, s, l);
 }
 
+/** Base colors shown as-is in dark mode (they already read well there), so
+ *  the band below doesn't lighten them. Mirrored in index.html. */
+const DARK_EXACT = new Set(['#f5c400']);
+
 /** Push a color into a readable saturation/lightness band for the given theme,
  *  preserving hue. Dark themes want lighter accents; light themes want deeper
  *  ones — so the same base palette reads well on both backgrounds. */
 export function normalizeForTheme(hex: string, theme: Theme): string {
+  if (theme === 'dark' && DARK_EXACT.has(hex.toLowerCase())) return hex;
   const [h, s, l] = hexToHsl(hex);
   const s2 = clamp(s, 60, 96);
   let l2 = theme === 'dark' ? clamp(l, 62, 76) : clamp(l, 40, 52);
@@ -112,7 +117,7 @@ export function normalizeForTheme(hex: string, theme: Theme): string {
 }
 
 /** Page background per theme — mirrors --bg in index.css. */
-const PAGE_BG: Record<Theme, string> = { light: '#f0eee6', dark: '#0c0b16' };
+const PAGE_BG: Record<Theme, string> = { light: '#f0eee6', dark: '#050508' };
 
 function luminance(hex: string): number {
   const [r, g, b] = hexToRgb(hex).map((v) => {
