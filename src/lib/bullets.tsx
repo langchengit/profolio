@@ -1,3 +1,5 @@
+import { TEXT_LINK } from './linkStyle';
+
 const LINK_PATTERN = /\[([^\]]+)\]\(([^)]+)\)/g;
 const DOMAIN_PATTERN = /\b[a-z0-9-]+\.(?:com|org|net|io|dev|co)\b/gi;
 
@@ -16,7 +18,7 @@ export function renderBulletText(text: string): React.ReactNode[] {
     }
     nodes.push(
       <a key={key++} href={href} target="_blank" rel="noreferrer"
-        className="text-accent underline-offset-2 hover:underline">
+        className={`text-accent ${TEXT_LINK}`}>
         {label}
       </a>
     );
@@ -38,7 +40,7 @@ function renderDomains(text: string, baseKey: number): React.ReactNode[] {
     if (match && idx < arr.length - 1) {
       acc.push(
         <a key={baseKey + idx} href={`https://${match}`} target="_blank" rel="noreferrer"
-          className="text-accent underline-offset-2 hover:underline">
+          className={`text-accent ${TEXT_LINK}`}>
           {match}
         </a>
       );

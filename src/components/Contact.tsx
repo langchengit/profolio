@@ -4,6 +4,7 @@ import { contact } from '../data/resume';
 import { GithubIcon, LinkedinIcon } from './BrandIcons';
 import { Section } from './Section';
 import { MetaRow, Panel, PanelRow, TitleRow } from './Panel';
+import { TEXT_LINK } from '../lib/linkStyle';
 
 const LINK = 'inline-flex items-center gap-1.5 py-1.5 transition hover:text-accent';
 
@@ -45,7 +46,7 @@ export function Contact() {
             title={
               <a
                 href={`mailto:${contact.email}`}
-                className="break-words transition hover:text-accent"
+                className={`break-words ${TEXT_LINK}`}
               >
                 {contact.email}
               </a>

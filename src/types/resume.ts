@@ -36,10 +36,14 @@ export interface ProjectEntry {
   id: string;
   name: string;
   affiliation?: string;
+  /** Link for the affiliation (e.g. the event page). */
+  affiliationUrl?: string;
   location?: string;
   tags: string[];
   bullets: string[];
   githubUrl: string;
+  /** Several repos for one project (e.g. mobile + web); shown instead of githubUrl. */
+  codeLinks?: { label: string; url: string }[];
   liveUrl: string;
   imageUrl: string;
   thumbnail?: string;

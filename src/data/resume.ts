@@ -122,6 +122,39 @@ export const experience: ExperienceEntry[] = [
 
 export const projects: ProjectEntry[] = [
   {
+    id: 'leavy',
+    name: 'Leavy: Calendar-Based Departure Alerts',
+    affiliation: 'Personal Project',
+    tags: ['TypeScript', 'React Native', 'Expo', 'Supabase', 'Google Maps & Calendar APIs'],
+    bullets: [
+      'Built a mobile and web app that pairs calendars with live Google Maps travel times and a grace period to tell users when to leave, helping them stop arriving late',
+      'Added Google and Apple sign-in with Supabase so preferences sync across phone and web, plus a no-account guest mode',
+    ],
+    githubUrl: 'https://github.com/langchengit/leavy',
+    codeLinks: [
+      { label: 'Mobile', url: 'https://github.com/langchengit/leavy' },
+      { label: 'Web', url: 'https://github.com/langchengit/leavy-web' },
+    ],
+    liveUrl: 'https://leavy-web.vercel.app',
+    imageUrl: '',
+  },
+
+  {
+    id: 'qlang',
+    name: 'qlang: Quantum Constraint Compiler',
+    affiliation: 'Qiskit Fall Fest',
+    affiliationUrl: 'https://www.ibm.com/quantum/events/fall-fest-2026',
+    tags: ['Python', 'Qiskit', 'Qiskit Aer', 'Pytest', 'Jupyter'],
+    bullets: [
+      'Built a Python library with a 4-person team that compiles rules like x + y == 3 into Qiskit quantum circuits and solves them with Grover search and QAOA',
+      'Wrote the Grover search module (phase oracle, diffuser, and search loop), using the BBHT algorithm to choose the number of Grover steps when the number of solutions is unknown',
+    ],
+    githubUrl: 'https://github.com/asherhe/qlang',
+    liveUrl: '',
+    imageUrl: '',
+  },
+
+  {
     id: 'line-following-vehicle',
     name: 'Autonomous Line-Following Vehicle',
     affiliation: 'University Hill Secondary School',

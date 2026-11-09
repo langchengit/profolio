@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { renderBulletText } from '../lib/bullets';
 import { Reveal } from './Reveal';
+import { TEXT_LINK } from '../lib/linkStyle';
 
 /** Shared building blocks for the bordered, hairline-ruled section panels:
  *  a mono meta row, a display title with a right-aligned aside, numbered
@@ -82,7 +83,7 @@ export function TitleLink({
       href={href}
       target="_blank"
       rel="noreferrer"
-      className={`cursor-pointer ${color} underline decoration-current decoration-1 underline-offset-[0.2em]`}
+      className={`cursor-pointer ${color} ${TEXT_LINK}`}
     >
       {children}
       <span className="sr-only"> (opens in a new tab)</span>
