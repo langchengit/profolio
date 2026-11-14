@@ -60,9 +60,9 @@
   --surface-strong: rgba(255, 255, 255, 0.08);
   --border: rgba(255, 255, 255, 0.09);
   --border-strong: rgba(255, 255, 255, 0.17);
-  --text: #ecebf7;
-  --muted: #a8a5c0;
-  --faint: #85829e;
+  --text: #f2ece0;
+  --muted: #c4bcab;
+  --faint: #948c7b;
   --accent: #f5c400;
   --accent-2: #f04c4c;
   --accent-3: #f44865;
