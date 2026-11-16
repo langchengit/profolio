@@ -53,6 +53,20 @@ export const education: EducationEntry[] = [
 
 export const experience: ExperienceEntry[] = [
   {
+    id: 'waterloo-rocketry',
+    organization: 'Waterloo Rocketry',
+    role: 'Software Developer',
+    url: 'https://www.waterloorocketry.com/',
+    tags: ['TypeScript', 'React', 'Electron'],
+    location: 'Waterloo, ON',
+    start: 'Oct 2026',
+    end: 'Present',
+    bullets: [
+      'Building the grid layout system for the ground station launch app, an Electron and React dashboard that displays live rocket telemetry during launches',
+      'Implemented click-and-drag moving and resizing of widgets, with collision detection that relocates overlapping widgets',
+    ],
+  },
+  {
     id: 'vshacks',
     organization: 'vsHacks',
     role: 'Vice Chair',
