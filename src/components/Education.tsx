@@ -8,7 +8,7 @@ export function Education() {
       {/* Date-ordered like Experience, so the rows share the same timeline rail. */}
       <Panel>
         {education.map((e, i) => (
-          <PanelRow key={e.id} index={i} line>
+          <PanelRow key={e.id} index={i} line logo={e.logo} logoColor={e.logoColor} logoDark={e.logoDark} logoTile={e.logoTile}>
             <MetaRow left={`${e.start} — ${e.end}`} right={e.location} />
             <TitleRow title={e.school} aside={e.credential} />
             {e.detail && (

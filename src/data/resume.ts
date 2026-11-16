@@ -9,6 +9,13 @@ import type {
 } from '../types/resume';
 import lineFollowingThumbnail from '../assets/front.jpg';
 import taskManagerThumnail from '../assets/task-manager-report.png';
+import vshacksLogo from '../assets/logos/vshacks.svg';
+import waterlooRocketryLogo from '../assets/logos/waterloo-rocketry.png';
+import waterlooRocketryLogoWhite from '../assets/logos/waterloo-rocketry-white.png';
+import learningBuddiesLogo from '../assets/logos/learning-buddies.png';
+import uwaterlooLogo from '../assets/logos/uwaterloo.svg';
+import ubcLogo from '../assets/logos/ubc.png';
+import uhillLogo from '../assets/logos/uhill.png';
 
 // photoUrl left blank until a real photo is provided — UI falls back to initials.
 export const personal: PersonalInfo = {
@@ -24,6 +31,8 @@ export const personal: PersonalInfo = {
 export const education: EducationEntry[] = [
   {
     id: 'uwaterloo',
+    logo: uwaterlooLogo,
+    logoTile: false,
     school: 'University of Waterloo',
     credential: 'Bachelor of Applied Science in Software Engineering | Co-op',
     detail: 'Earned President\'s Scholarship of Distinction',
@@ -33,6 +42,8 @@ export const education: EducationEntry[] = [
   },
   {
     id: 'ubc',
+    logo: ubcLogo,
+    logoTile: false,
     school: 'University of British Columbia',
     credential: 'Access Studies in Mathematics',
     detail: 'A+ in MATH 200: Multivariable Calculus',
@@ -42,6 +53,8 @@ export const education: EducationEntry[] = [
   },
   {
     id: 'uhill',
+    logo: uhillLogo,
+    logoTile: false,
     school: 'University Hill Secondary School',
     credential: 'High School Diploma',
     detail: "Pre-calculus 12: 99\nCalculus 12: 100\nAP Physics 2 Honours 12: 99\nComputer Programming 12: 100",
@@ -54,6 +67,10 @@ export const education: EducationEntry[] = [
 export const experience: ExperienceEntry[] = [
   {
     id: 'waterloo-rocketry',
+    logo: waterlooRocketryLogo,
+    // Black parts turned white so they show on the dark page.
+    logoDark: waterlooRocketryLogoWhite,
+    logoTile: false,
     organization: 'Waterloo Rocketry',
     role: 'Software Developer',
     url: 'https://www.waterloorocketry.com/',
@@ -71,6 +88,10 @@ export const experience: ExperienceEntry[] = [
     organization: 'vsHacks',
     role: 'Vice Chair',
     url: 'https://vshacks.com/',
+    logo: vshacksLogo,
+    logoTile: false,
+    // vsHacks purple, brightened from the site's #2c046d so it shows on both themes.
+    logoColor: '#7c3aed',
     tags: ['Outreach', 'Web Management', 'GitHub', 'Event Operations'],
     location: 'Vancouver, BC',
     start: 'Sep 2024',
@@ -91,6 +112,8 @@ export const experience: ExperienceEntry[] = [
   },
   {
     id: 'learning-buddies',
+    logo: learningBuddiesLogo,
+    logoTile: false,
     organization: 'Learning Buddies Network',
     role: 'Math Mentor',
     url: 'https://www.learningbuddiesnetwork.com/',
@@ -106,6 +129,8 @@ export const experience: ExperienceEntry[] = [
   },
   {
     id: 'physineering',
+    logo: uhillLogo,
+    logoTile: false,
     organization: 'University Hill Secondary School — Physineering Club',
     role: 'Co-Leader',
     tags: ['Physics', 'Engineering', 'Teaching', 'Competition Prep'],
@@ -120,6 +145,8 @@ export const experience: ExperienceEntry[] = [
   },
   {
     id: 'math-challengers',
+    logo: uhillLogo,
+    logoTile: false,
     organization: 'University Hill Secondary School — Math Challengers',
     role: 'Junior Mentor',
     tags: ['Mathematics', 'Mentorship', 'Competition Prep'],

@@ -21,17 +21,98 @@ interface PanelRowProps {
   /** Draw the connecting line, turning the node squares into one timeline.
    *  Only meaningful for date-ordered sections. */
   line?: boolean;
+  /** Organization logo shown on the rail in place of the accent square. */
+  logo?: string;
+  /** Brand colour for a one-colour SVG logo, which is then drawn as a shape
+   *  in that colour. Without it the logo file is shown as-is (full colour). */
+  logoColor?: string;
+  /** Alternate logo file shown in dark mode instead of `logo` (e.g. a version
+   *  with black parts turned white). */
+  logoDark?: string;
+  /** Put the logo on a framed light tile (default). Set false for logos with
+   *  their own solid shape (a crest, a filled square or disc) that read well
+   *  on both themes without one. */
+  logoTile?: boolean;
   children: ReactNode;
 }
 
-/** One row of a panel: a left gutter carrying the accent node (and optionally
- *  the timeline line) plus the content column.
+/** Size of the logo badge (45px), and where it sits so its centre lands on
+ *  the meta line: content padding (1.5rem / 2rem) plus half a meta row (9px),
+ *  minus half the badge (22.5px). */
+const BADGE = 'h-[45px] w-[45px] top-[calc(1.5rem-13.5px)] sm:top-[calc(2rem-13.5px)]';
+
+/** Logo badge that replaces the accent node on the timeline rail. Its opaque
+ *  background hides the rail line passing behind it.
+ *
+ *  With `tile`, the logo sits on a framed light tile in both themes, so logos
+ *  with black or dark parts stay visible on the dark page. Without it, the
+ *  logo fills the whole badge on the page colour, with no frame. */
+function LogoBadge({
+  src,
+  darkSrc,
+  color,
+  tile,
+}: {
+  src: string;
+  darkSrc?: string;
+  color?: string;
+  tile: boolean;
+}) {
+  const shape = `url("${src}")`;
+  const frame = tile ? 'border border-border-strong bg-[#fbf9f2]' : 'bg-bg';
+  const size = tile ? 'h-[35px] w-[35px]' : 'h-full w-full';
+  return (
+    <span
+      className={`absolute left-1/2 z-10 grid -translate-x-1/2 place-items-center ${frame} ${BADGE}`}
+    >
+      {color ? (
+        <span
+          className={`block ${size}`}
+          style={{
+            backgroundColor: color,
+            maskImage: shape,
+            WebkitMaskImage: shape,
+            maskSize: 'contain',
+            WebkitMaskSize: 'contain',
+            maskRepeat: 'no-repeat',
+            WebkitMaskRepeat: 'no-repeat',
+            maskPosition: 'center',
+            WebkitMaskPosition: 'center',
+          }}
+        />
+      ) : (
+        darkSrc ? (
+        <>
+          <img src={src} alt="" className={`${size} object-contain dark:hidden`} />
+          <img src={darkSrc} alt="" className={`${size} hidden object-contain dark:block`} />
+        </>
+      ) : (
+        <img src={src} alt="" className={`${size} object-contain`} />
+      )
+      )}
+    </span>
+  );
+}
+
+/** One row of a panel: a left gutter carrying the accent node (or a logo
+ *  badge, and optionally the timeline line) plus the content column.
  *
  *  The vertical padding lives on the content column rather than the article, so
  *  the line spans the row edge to edge and joins up with the next row's. The
  *  offsets below are that padding (1.5rem / 2rem) plus half a meta row, which
- *  puts the node square on the meta line. */
-export function PanelRow({ index, line = false, children }: PanelRowProps) {
+ *  puts the node square on the meta line.
+ *
+ *  Timeline rows get a gutter wide enough for a logo badge whether or not
+ *  this row has one, so every row in the panel keeps the same text edge. */
+export function PanelRow({
+  index,
+  line = false,
+  logo,
+  logoColor,
+  logoDark,
+  logoTile = true,
+  children,
+}: PanelRowProps) {
   return (
     <Reveal delay={index * 60}>
       <article
@@ -39,7 +120,7 @@ export function PanelRow({ index, line = false, children }: PanelRowProps) {
           index > 0 ? 'border-t border-border' : ''
         }`}
       >
-        <div className="relative w-2 shrink-0" aria-hidden="true">
+        <div className={`relative shrink-0 ${line ? 'w-[45px]' : 'w-2'}`} aria-hidden="true">
           {line && (
             <span
               className={`absolute bottom-0 left-1/2 w-px -translate-x-1/2 bg-border ${
@@ -47,7 +128,11 @@ export function PanelRow({ index, line = false, children }: PanelRowProps) {
               }`}
             />
           )}
-          <span className="absolute left-1/2 top-[calc(1.5rem+5px)] h-2 w-2 -translate-x-1/2 bg-accent sm:top-[calc(2rem+5px)]" />
+          {logo ? (
+            <LogoBadge src={logo} darkSrc={logoDark} color={logoColor} tile={logoTile} />
+          ) : (
+            <span className="absolute left-1/2 top-[calc(1.5rem+5px)] h-2 w-2 -translate-x-1/2 bg-accent sm:top-[calc(2rem+5px)]" />
+          )}
         </div>
         <div className="min-w-0 flex-1 py-6 sm:py-8">{children}</div>
       </article>

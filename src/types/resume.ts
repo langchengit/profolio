@@ -14,6 +14,14 @@ export interface EducationEntry {
   school: string;
   credential: string;
   detail?: string;
+  /** Logo shown on the timeline rail in place of the accent square. */
+  logo?: string;
+  /** Brand colour for a one-colour SVG logo; omit to show the file as-is. */
+  logoColor?: string;
+  /** Set false to drop the light tile behind the logo (see PanelRow). */
+  logoTile?: boolean;
+  /** Alternate logo file for dark mode (see PanelRow). */
+  logoDark?: string;
   location: string;
   start: string;
   end: string;
@@ -25,6 +33,14 @@ export interface ExperienceEntry {
   role: string;
   /** Live website for the organization; when set, its name becomes a link. */
   url?: string;
+  /** Logo shown on the timeline rail in place of the accent square. */
+  logo?: string;
+  /** Brand colour for a one-colour SVG logo; omit to show the file as-is. */
+  logoColor?: string;
+  /** Set false to drop the light tile behind the logo (see PanelRow). */
+  logoTile?: boolean;
+  /** Alternate logo file for dark mode (see PanelRow). */
+  logoDark?: string;
   tags: string[];
   location: string;
   start: string;
